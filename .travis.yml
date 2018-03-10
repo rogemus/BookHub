@@ -1,0 +1,10 @@
+language: python
+python:
+  - "3.6"
+install:
+  - pip install -r BookHub/requirements/test.txt
+before_script:
+  - python manage.py migrate
+script:
+  - flake8 BookHub
+  - python manage.py tests

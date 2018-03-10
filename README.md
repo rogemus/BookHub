@@ -1,6 +1,9 @@
 # BookHub
 Projekt grupowy na Systemy Informatyczne
 
+## Build Status
+[![Build Status](https://travis-ci.org/rogemus/BookHub.svg?branch=master)](https://travis-ci.org/rogemus/BookHub)
+
 ## Developing
 1. Create VirtualEnv ```python3.6 -m venv venv```
 2. Activate VirtualEnv ```source venv/bin/activate```

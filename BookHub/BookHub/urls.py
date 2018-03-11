@@ -3,9 +3,17 @@ from django.urls import path, include
 from rest_framework import routers
 
 from books import views
+from books.views import BookHubApi
 
-api_router = routers.DefaultRouter()
-api_router.register(r'books', views.UserViewSet)
+
+class DocumentedRouter(routers.DefaultRouter):
+    APIRootView = BookHubApi
+
+
+api_router = DocumentedRouter()
+api_router.register(r'books', views.BookViewSet)
+api_router.register(r'authors', views.AuthorViewSet)
+api_router.register(r'publishers', views.PublisherViewSet)
 
 urlpatterns = [
     path('api/', include(api_router.urls)),

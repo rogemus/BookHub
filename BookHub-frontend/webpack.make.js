@@ -35,25 +35,12 @@ module.exports = (options) => {
 					]
 				},
 				{
-					test: /\.scss$/,
-					use: ExtractTextPlugin.extract({
-						fallback: 'style-loader',
-						use: [
-							{
-								loader: 'css-loader?-url'
-							},
-							{
-								loader: 'postcss-loader'
-							},
-							{
-								loader: 'sass-loader'
-							}
-						]
-					})
-				},
-				{
-					test: /\.html$/,
-					use: ['html-loader']
+					test: /\.css$/,
+					use: [
+						'style-loader',
+						{loader: 'css-loader', options: {importLoaders: 1}},
+						'postcss-loader'
+					]
 				}
 			]
 		},
@@ -66,7 +53,7 @@ module.exports = (options) => {
 			}),
 			new FriendlyErrorsWebpackPlugin()
 		],
-		devtool: 'eval-source-map',
+		devtool: 'source-map',
 		node: {
 			fs: 'empty'
 		}

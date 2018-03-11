@@ -16,7 +16,7 @@ module.exports = Object.assign(
 				parallel: true,
 				cache: true,
 				uglifyOptions: {
-					mangle: false
+					mangle: true
 				}
 			}),
 			new OptimizeCssAssetsPlugin({

@@ -12,4 +12,4 @@ before_script:
 script:
   - flake8 BookHub
   - python BookHub/manage.py test
-  - cd BookHub-frontend && npm run lint
+  - npm run lint

@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
@@ -45,9 +44,6 @@ module.exports = (options) => {
 			]
 		},
 		plugins: [
-			new ExtractTextPlugin('bundle.css', {
-				allChunks: true
-			}),
 			new StyleLintPlugin({
 				configFile: '.stylelintrc.json'
 			}),

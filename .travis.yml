@@ -5,8 +5,11 @@ env:
   - DJANGO_SETTINGS_MODULE='BookHub.settings.local'
 install:
   - pip install -r BookHub/requirements/test.txt
+  - npm install ./BookHub-frontend
+  - npm install -g eslint
 before_script:
   - python BookHub/manage.py migrate
 script:
   - flake8 BookHub
   - python BookHub/manage.py test
+  - cd BookHub-frontend && npm run lint

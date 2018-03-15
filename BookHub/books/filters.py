@@ -4,6 +4,7 @@ from books.models import Author, Book
 
 
 class BookFilter(django_filters.FilterSet):
+    publisher_name = django_filters.CharFilter(name='publisher__name')
     author_first_name = django_filters.ModelMultipleChoiceFilter(
         name='authors__first_name',
         to_field_name='first_name',
@@ -24,6 +25,6 @@ class BookFilter(django_filters.FilterSet):
             'isbn',
             'author_first_name',
             'author_last_name',
-            'publisher__name',
+            'publisher_name',
             'authors',
         )

@@ -100,7 +100,7 @@ class AuthorAPIViewFilterTests(BookHubAPITestCase):
         Ensure query param filtering by first name works
         """
         anabel = Author.objects.create(first_name='Anabel', last_name='Wol')
-        casandra = Author.objects.create(first_name='Casandra', last_name='Strange')
+        casandra = Author.objects.create(first_name='Casandra', last_name='Strange')    # noqa
 
         response = self.client.get(reverse('author-list'), {'first_name': 'Anabel'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -119,7 +119,7 @@ class AuthorAPIViewFilterTests(BookHubAPITestCase):
         """
         Ensure query param filtering by last name works
         """
-        anabel = Author.objects.create(first_name='Anabel', last_name='Wol')
+        anabel = Author.objects.create(first_name='Anabel', last_name='Wol')    # noqa
         casandra = Author.objects.create(first_name='Casandra', last_name='Strange')
 
         response = self.client.get(reverse('author-list'), {'last_name': 'Strange'})
@@ -140,7 +140,7 @@ class AuthorAPIViewFilterTests(BookHubAPITestCase):
         Ensure query param filtering by last name and first name works
         """
         anabel = Author.objects.create(first_name='Anabel', last_name='Wol')
-        casandra = Author.objects.create(first_name='Casandra', last_name='Strange')
+        casandra = Author.objects.create(first_name='Casandra', last_name='Strange')    # noqa
 
         for query_filter, expected in [
             ({'first_name': 'Anabel', 'last_name': 'Strange'}, []),
@@ -203,7 +203,7 @@ class PublisherAPIViewFilterTests(BookHubAPITestCase):
         Ensure query param filtering by name works
         """
         publisher = Publisher.objects.create(name='Super Pub', website='https://example.com/')
-        publisher_2 = Publisher.objects.create(name='Super Old', website='https://example.com/')
+        publisher_2 = Publisher.objects.create(name='Super Old', website='https://example.com/')    # noqa
 
         response = self.client.get(reverse('publisher-list'), {'name': 'Super Pub'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)

@@ -7,9 +7,9 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = (
+            'id',
             'first_name',
             'last_name',
-            'api_url'
         )
 
 
@@ -17,9 +17,9 @@ class PublisherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publisher
         fields = (
+            'id',
             'name',
             'website',
-            'api_url'
         )
 
 
@@ -38,5 +38,4 @@ class BookSerializer(serializers.ModelSerializer):
             'cover',
             'language',
             'isbn',
-            'api_url'
         )

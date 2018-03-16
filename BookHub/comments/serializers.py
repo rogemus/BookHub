@@ -10,5 +10,6 @@ class CommentSerializer(serializers.ModelSerializer):
             'id',
             'author',
             'text',
-            'created_at',
+            'submit_date',
         )
+        extra_kwargs = {'id': {'read_only': True}}

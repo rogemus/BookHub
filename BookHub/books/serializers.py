@@ -1,6 +1,19 @@
 from rest_framework import serializers
 
 from books.models import Book, Author, Publisher
+from comments.models import Comment
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField()
+
+    class Meta:
+        model = Comment
+        fields = (
+            'author',
+            'text',
+            'submit_date',
+        )
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -26,6 +39,7 @@ class PublisherSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     authors = AuthorSerializer(many=True, read_only=True)
     publisher = PublisherSerializer(read_only=True)
+    last_comments = serializers.SerializerMethodField(source='comments')
 
     class Meta:
         model = Book
@@ -38,5 +52,10 @@ class BookSerializer(serializers.ModelSerializer):
             'cover',
             'language',
             'isbn',
+            'last_comments',
             'api_url'
         )
+
+    def get_last_comments(self, book):
+        serializer = CommentSerializer(book.get_last_comments(3), many=True)
+        return serializer.data

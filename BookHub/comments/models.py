@@ -3,17 +3,19 @@ import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
 
+
 User = get_user_model()
 
 
 class Comment(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    book = models.ForeignKey('books.Book', on_delete=models.CASCADE)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    book = models.ForeignKey('books.Book', related_name='comments', on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(null=False, blank=False, max_length=250)
-    created_at = models.DateTimeField(auto_now_add=True)
+    submit_date = models.DateTimeField(auto_now_add=True, db_index=True)
     updated_at = models.DateTimeField(null=True, blank=True)
-    visible = models.BooleanField(default=True)
+    is_public = models.BooleanField(default=True)
+    is_removed = models.BooleanField(default=False)
 
 
     def __str__(self):

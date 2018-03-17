@@ -61,7 +61,8 @@ module.exports = () => {
 			new StyleLintPlugin({
 				configFile: '.stylelintrc.json'
 			}),
-			new FriendlyErrorsWebpackPlugin()
+			new FriendlyErrorsWebpackPlugin(),
+			//new BundleAnalyzerPlugin()
 		],
 		devtool: 'source-map',
 		node: {

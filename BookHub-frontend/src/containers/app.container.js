@@ -7,7 +7,7 @@ import {
 	Route,
 	Switch
 } from 'react-router-dom';
-
+import '../styles/main.css';
 import 'semantic-ui-css/semantic.min.css';
 
 import HomePage from './homePage/homePage.container';
@@ -16,12 +16,12 @@ import BookPage from './bookPage/bookPage.container';
 const App = ({store}) => (
 	<Provider store={store}>
 		<Router>
-			<Switch>
-				<Container text>
+			<Container text>
+				<Switch>
 					<Route exact path="/" component={HomePage}/>
 					<Route path="/books/:id" component={BookPage}/>
-				</Container>
-			</Switch>
+				</Switch>
+			</Container>
 		</Router>
 	</Provider>
 );

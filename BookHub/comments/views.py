@@ -15,7 +15,7 @@ class CommentResultsSetPagination(LimitOffsetPagination):
 
 class CommentViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows books to be viewed or edited.
+    API endpoint that allows comments to be viewed or edited.
     """
     permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_class = CommentSerializer

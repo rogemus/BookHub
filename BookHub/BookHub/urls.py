@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
@@ -20,8 +21,12 @@ api_router.register(r'publishers', views.PublisherViewSet)
 domains_router = nested_routers.NestedSimpleRouter(api_router, r'books', lookup='books')
 domains_router.register(r'comments', CommentViewSet, base_name='book-comments')
 
+api_urlpatterns = [
+    url('^', include(api_router.urls)),
+    url('^', include(domains_router.urls)),
+]
+
 urlpatterns = [
-    path('api/', include(api_router.urls)),
-    path('api/', include(domains_router.urls)),
+    path('api/', include(api_urlpatterns)),
     path('admin/', admin.site.urls),
 ]

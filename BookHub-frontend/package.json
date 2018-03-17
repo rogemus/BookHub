@@ -13,14 +13,15 @@
   "author": "Kacper Rogowski",
   "dependencies": {
     "axios": "^0.18.0",
+    "lodash": "^4.17.5",
+    "prop-types": "latest",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "redux-thunk": "^2.2.0",
-    "prop-types": "latest",
     "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.78.3"
   },
   "devDependencies": {

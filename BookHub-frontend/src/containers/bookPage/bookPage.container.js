@@ -1,24 +1,27 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getBook} from '../../actions/book.action';
+import {Container} from 'semantic-ui-react';
+import isEmpty from 'lodash/isEmpty';
+import BookDetails from '../../components/bookDetails/bookDetails.componnet';
 
 class BookPage extends Component {
 	componentDidMount() {
 		this.props.getBook(this.props.match.params.id);
 	}
 
-	renderBook() {
-		if (this.props.book) {
-			this.showBook = true;
+	renderBookDetails() {
+		if (!isEmpty(this.props.book)) {
+			return <BookDetails book={this.props.book}/>;
 		}
 	}
 
 	render() {
 		return (
-			<div>
+			<Container text>
 				<h1>Book</h1>
-				{this.showBook}
-			</div>
+				{this.renderBookDetails()}
+			</Container>
 		);
 	}
 }

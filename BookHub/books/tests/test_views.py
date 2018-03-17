@@ -50,7 +50,7 @@ class BookHubAPITestCase(APITestCase):
                 'id': publisher.pk,
                 'website': publisher.website
             },
-            'publication_date': f"{book.publication_date.date()}",
+            'publication_date': f'{book.publication_date.date()}',
             'image_url': book.image_url,
             'cover': book.cover,
             'language': book.language,

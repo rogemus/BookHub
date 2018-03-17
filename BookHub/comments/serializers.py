@@ -1,6 +1,9 @@
-from rest_framework import serializers
+import logging
 
+from rest_framework import serializers
 from comments.models import Comment
+
+logger = logging.getLogger(__name__)
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -12,4 +15,7 @@ class CommentSerializer(serializers.ModelSerializer):
             'text',
             'submit_date',
         )
-        extra_kwargs = {'id': {'read_only': True}}
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'author': {'read_only': True}
+        }

@@ -3,7 +3,6 @@ import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
 
-
 User = get_user_model()
 
 
@@ -17,7 +16,5 @@ class Comment(models.Model):
     is_public = models.BooleanField(default=True)
     is_removed = models.BooleanField(default=False)
 
-
     def __str__(self):
         return f"{self.text[:30]}{'...' if len(self.text) > 30 else ''}"
-

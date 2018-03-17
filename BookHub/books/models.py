@@ -36,7 +36,6 @@ class Book(models.Model):
     language = models.CharField(max_length=2, choices=BOOK_LANGUAGE_CHOICES, default='PL')
     isbn = ISBNField(db_index=True)
 
-
     def get_last_comments(self, qt=3):
         return self.comments.all().order_by('-submit_date')[:qt]
 

@@ -22,12 +22,16 @@ class CommentViewSet(viewsets.ModelViewSet):
     pagination_class = CommentResultsSetPagination
 
     def get_queryset(self):
-        return Comment.objects.filter(book=self.kwargs['books_pk']).order_by('-submit_date')
+        return Comment.objects.filter(
+            book=self.kwargs['books_pk'],
+            is_removed=False,
+            is_public=True,
+        ).order_by('-submit_date')
 
     def perform_create(self, serializer):
         queryset = Book.objects.all()
         book = get_object_or_404(queryset, pk=self.kwargs['books_pk'])
         serializer.save(
             author=self.request.user,
-            book=book
+            book=book,
         )

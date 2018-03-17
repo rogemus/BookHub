@@ -14,4 +14,4 @@ class Comment(models.Model):
     is_removed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.text[:30]}{'...' if len(self.text) > 30 else ''}"
+        return f'{self.text[:30]}{"..." if len(self.text) > 30 else ""}'

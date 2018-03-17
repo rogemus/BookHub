@@ -1,12 +1,10 @@
-import logging
-
 from rest_framework import serializers
 from comments.models import Comment
 
-logger = logging.getLogger(__name__)
-
 
 class CommentSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField()
+
     class Meta:
         model = Comment
         fields = (

@@ -19,7 +19,6 @@ class BookPage extends Component {
 	render() {
 		return (
 			<Container text>
-				<h1>Book</h1>
 				{this.renderBookDetails()}
 			</Container>
 		);
@@ -28,7 +27,7 @@ class BookPage extends Component {
 
 function mapStateToProps(state) {
 	return {
-		book: state.book
+		book: state.book.bookData
 	};
 }
 

@@ -4,6 +4,8 @@ bundle.js.map
 bundle.css
 package-lock.json
 yarn.lock
+url-loader
+fonts
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

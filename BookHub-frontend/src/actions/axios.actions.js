@@ -3,12 +3,12 @@ import {
 	ERRORS
 } from './types';
 
-const API_URL = 'http://localhost:8080/api';
+const API_URL = '/api';
 
 const instance = axios.create({
 	baseURL: API_URL,
 	headers: {
-		'Accept': 'application/json'
+		accept: 'application/json'
 	}
 });
 

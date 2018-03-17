@@ -7,7 +7,14 @@ module.exports = Object.assign(
 	{
 		devServer: {
 			contentBase: path.join(__dirname, 'public'),
-			port: 8000
+			port: 8000,
+			proxy: {
+				'/api/**': {
+					target: 'http://localhost:8080',
+					secure: false,
+					logLevel: 'debug'
+				}
+			}
 		}
 	}
 );

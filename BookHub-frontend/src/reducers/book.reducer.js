@@ -5,7 +5,7 @@ import {
 export default (state = {}, action) => {
 	switch (action.type) {
 		case GET_BOOK:
-			return {...state, book: action.payload};
+			return {...state, bookData: action.payload};
 	}
 
 	return state;

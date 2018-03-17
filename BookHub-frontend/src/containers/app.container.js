@@ -7,6 +7,8 @@ import {
 	Switch
 } from 'react-router-dom';
 
+import 'semantic-ui-css/semantic.min.css';
+
 import HomePage from './homePage/homePage.container';
 import BookPage from './bookPage/bookPage.container';
 

@@ -40,6 +40,20 @@ module.exports = () => {
 						{loader: 'css-loader', options: {importLoaders: 1}},
 						'postcss-loader'
 					]
+				},
+				{
+					test: /\.(eot|svg|ttf|woff|woff2)$/,
+					loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
+				},
+				{
+					test: /\.(png|jp(e*)g|svg)$/,
+					use: [{
+						loader: 'url-loader',
+						options: {
+							limit: 8000, // Convert images < 8kb to base64 strings
+							name: 'url-loader?limit=1024&name=images/[name].[ext]'
+						}
+					}]
 				}
 			]
 		},

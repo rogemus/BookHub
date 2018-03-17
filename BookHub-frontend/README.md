@@ -1,5 +1,5 @@
 # Requirements
-1. node.js `8.x / 9.x`
+1. node.js `8.x`
 2. npm `5.x`
 
 # Developing
@@ -7,7 +7,7 @@
 2. Start dev server ```npm run dev:server```
 
 # Additional scripts
-1. Start dev witout server ```npm run watch```
+1. Start dev without server ```npm run watch```
 2. Single build ```npm run build```
 3. Single production build ```npm run build:prod```
 

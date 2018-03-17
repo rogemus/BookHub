@@ -5,7 +5,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 require('babel-polyfill');
 
-module.exports = (options) => {
+module.exports = () => {
 	return {
 		entry: {
 			'bundle': ['babel-polyfill', './src/index.js']

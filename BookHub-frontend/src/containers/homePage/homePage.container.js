@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 class HomePage extends Component {
 	renderBook() {
@@ -14,6 +15,7 @@ class HomePage extends Component {
 		return (
 			<div>
 				<h1>Home</h1>
+				<Link to="/books/dupa">About</Link>
 				{this.renderBook()}
 			</div>
 		);

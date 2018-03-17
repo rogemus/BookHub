@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {
 	BrowserRouter as Router,
-	Route
+	Route,
+	Switch
 } from 'react-router-dom';
 
 import HomePage from './homePage/homePage.container';
+import BookPage from './bookPage/bookPage.container';
 
 const App = ({store}) => (
 	<Provider store={store}>
 		<Router>
-			<Route path="/" component={HomePage}/>
+			<Switch>
+				<Route exact path="/" component={HomePage}/>
+				<Route path="/books/:id" component={BookPage}/>
+			</Switch>
 		</Router>
 	</Provider>
 );

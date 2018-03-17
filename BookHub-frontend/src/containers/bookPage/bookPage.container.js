@@ -4,14 +4,20 @@ import {getBook} from '../../actions/book.action';
 
 class BookPage extends Component {
 	componentDidMount() {
-		this.bookID = this.props.match.params.id;
+		this.props.getBook(this.props.match.params.id);
+	}
+
+	renderBook() {
+		if (this.props.book) {
+			this.showBook = true;
+		}
 	}
 
 	render() {
 		return (
 			<div>
 				<h1>Book</h1>
-				{this.bookID}
+				{this.showBook}
 			</div>
 		);
 	}

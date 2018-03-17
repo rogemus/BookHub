@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getBook} from '../../actions/book.action';
-import {Container} from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import BookDetails from '../../components/bookDetails/bookDetails.componnet';
 
@@ -18,9 +17,9 @@ class BookPage extends Component {
 
 	render() {
 		return (
-			<Container text>
+			<div>
 				{this.renderBookDetails()}
-			</Container>
+			</div>
 		);
 	}
 }

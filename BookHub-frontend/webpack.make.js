@@ -46,12 +46,12 @@ module.exports = () => {
 					loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
 				},
 				{
-					test: /\.(png|jp(e*)g|svg)$/,
+					test: /\.(png|jp(e*)g)$/,
 					use: [{
 						loader: 'url-loader',
 						options: {
-							limit: 8000, // Convert images < 8kb to base64 strings
-							name: 'url-loader?limit=1024&name=images/[name].[ext]'
+							limit: 8000,
+							name: 'url-loader?name=images/[name].[ext]'
 						}
 					}]
 				}

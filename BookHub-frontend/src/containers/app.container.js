@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
+import {Container} from 'semantic-ui-react';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -16,8 +17,10 @@ const App = ({store}) => (
 	<Provider store={store}>
 		<Router>
 			<Switch>
-				<Route exact path="/" component={HomePage}/>
-				<Route path="/books/:id" component={BookPage}/>
+				<Container text>
+					<Route exact path="/" component={HomePage}/>
+					<Route path="/books/:id" component={BookPage}/>
+				</Container>
 			</Switch>
 		</Router>
 	</Provider>

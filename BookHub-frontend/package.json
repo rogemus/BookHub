@@ -12,6 +12,7 @@
   },
   "author": "Kacper Rogowski",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.2",
@@ -20,6 +21,8 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "prop-types": "latest"
+    "redux": "^3.6.0",
+    "semantic-ui-react": "^0.78.3"
   },
   "devDependencies": {
     "autoprefixer": "^8.1.0",

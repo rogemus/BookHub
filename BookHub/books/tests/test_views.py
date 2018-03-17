@@ -20,8 +20,12 @@ class BookHubAPITestCase(APITestCase):
         """
         self.assertEqual(
             json.loads(response.content.decode('utf8')),
-            {'count': len(expected_results), 'next': None, 'previous': None,
-             'results': expected_results}
+            {
+                'count': len(expected_results),
+                'next': None,
+                'previous': None,
+                'results': expected_results
+            }
         )
 
     def create_author_json_reposnse(self, author: Author):
@@ -29,9 +33,9 @@ class BookHubAPITestCase(APITestCase):
         Create json like response object
         """
         return {
-            "id": author.id,
-            "first_name": author.first_name,
-            "last_name": author.last_name
+            'id': author.id,
+            'first_name': author.first_name,
+            'last_name': author.last_name
         }
 
     def create_book_json_response(self, book: Book, publisher: Publisher, authors: [dict]):
@@ -50,13 +54,13 @@ class BookHubAPITestCase(APITestCase):
             'image_url': book.image_url,
             'cover': book.cover,
             'language': book.language,
-            'isbn': book.isbn
+            'isbn': book.isbn,
         }
 
 
 class AuthorAPIViewTests(BookHubAPITestCase):
     def setUp(self):
-        self.author_record = Author.objects.create(first_name='Name', last_name='Surname')
+        self.author = Author.objects.create(first_name='Name', last_name='Surname')
 
     def test_author_listing(self):
         """
@@ -69,9 +73,9 @@ class AuthorAPIViewTests(BookHubAPITestCase):
             response=response,
             expected_results=[
                 {
-                    'first_name': self.author_record.first_name,
-                    'id': self.author_record.pk,
-                    'last_name': self.author_record.last_name
+                    'first_name': self.author.first_name,
+                    'id': self.author.pk,
+                    'last_name': self.author.last_name
                 }
             ]
         )
@@ -80,37 +84,38 @@ class AuthorAPIViewTests(BookHubAPITestCase):
         """
         Ensure we can get author detail.
         """
-        response = self.client.get(reverse('author-detail', kwargs={'pk': self.author_record.pk}))
+        response = self.client.get(reverse('author-detail', kwargs={'pk': self.author.pk}))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(
             json.loads(response.content.decode('utf8')),
             {
-                'first_name': self.author_record.first_name,
-                'id': self.author_record.pk,
-                'last_name': self.author_record.last_name
+                'first_name': self.author.first_name,
+                'id': self.author.pk,
+                'last_name': self.author.last_name
             }
         )
 
 
 class AuthorAPIViewFilterTests(BookHubAPITestCase):
 
+    def setUp(self):
+        self.anabel = Author.objects.create(first_name='Anabel', last_name='Wol')
+        self.casandra = Author.objects.create(first_name='Casandra', last_name='Strange')
+
     def test_author_filtered_by_first_name(self):
         """
         Ensure query param filtering by first name works
         """
-        anabel = Author.objects.create(first_name='Anabel', last_name='Wol')
-        casandra = Author.objects.create(first_name='Casandra', last_name='Strange')    # noqa
-
         response = self.client.get(reverse('author-list'), {'first_name': 'Anabel'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assert_paginated_response(
             response=response,
             expected_results=[
                 {
-                    'first_name': anabel.first_name,
-                    'id': anabel.pk,
-                    'last_name': anabel.last_name
+                    'first_name': self.anabel.first_name,
+                    'id': self.anabel.pk,
+                    'last_name': self.anabel.last_name
                 }
             ]
         )
@@ -119,18 +124,15 @@ class AuthorAPIViewFilterTests(BookHubAPITestCase):
         """
         Ensure query param filtering by last name works
         """
-        anabel = Author.objects.create(first_name='Anabel', last_name='Wol')    # noqa
-        casandra = Author.objects.create(first_name='Casandra', last_name='Strange')
-
         response = self.client.get(reverse('author-list'), {'last_name': 'Strange'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assert_paginated_response(
             response=response,
             expected_results=[
                 {
-                    'first_name': casandra.first_name,
-                    'id': casandra.pk,
-                    'last_name': casandra.last_name
+                    'first_name': self.casandra.first_name,
+                    'id': self.casandra.pk,
+                    'last_name': self.casandra.last_name
                 }
             ]
         )
@@ -139,14 +141,11 @@ class AuthorAPIViewFilterTests(BookHubAPITestCase):
         """
         Ensure query param filtering by last name and first name works
         """
-        anabel = Author.objects.create(first_name='Anabel', last_name='Wol')
-        casandra = Author.objects.create(first_name='Casandra', last_name='Strange')    # noqa
-
         for query_filter, expected in [
             ({'first_name': 'Anabel', 'last_name': 'Strange'}, []),
-            ({'first_name': 'Anabel', 'last_name': 'Wol'}, [{'first_name': anabel.first_name,
-                                                             'id': anabel.pk,
-                                                             'last_name': anabel.last_name}]),
+            ({'first_name': 'Anabel', 'last_name': 'Wol'}, [{'first_name': self.anabel.first_name,
+                                                             'id': self.anabel.pk,
+                                                             'last_name': self.anabel.last_name}]),
         ]:
             with self.subTest(filter=query_filter, expected=expected):
                 response = self.client.get(reverse('author-list'), query_filter)
@@ -203,7 +202,7 @@ class PublisherAPIViewFilterTests(BookHubAPITestCase):
         Ensure query param filtering by name works
         """
         publisher = Publisher.objects.create(name='Super Pub', website='https://example.com/')
-        publisher_2 = Publisher.objects.create(name='Super Old', website='https://example.com/')    # noqa
+        publisher_2 = Publisher.objects.create(name='Super Old', website='https://example.com/')  # noqa
 
         response = self.client.get(reverse('publisher-list'), {'name': 'Super Pub'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)

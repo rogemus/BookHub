@@ -1,0 +1,14 @@
+.listing {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.listing .listing-item {
+    padding: 0 15px 0 0;
+    max-width: 33.3333%;
+    margin: 0 0 15px 0;
+}
+
+.listing .card:nth-child(3n) {
+    padding: 0;
+}

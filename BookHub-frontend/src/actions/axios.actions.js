@@ -12,13 +12,31 @@ const instance = axios.create({
 	}
 });
 
-export function _get(path, config, type) {
+export function _get(path, config, actionType) {
 	return (dispatch) => {
 		instance.get(`/${path}/`, config)
 			.then((response) => {
 				dispatch({
 					payload: response.data,
-					type: type
+					type: actionType
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					payload: error,
+					type: ERRORS
+				});
+			});
+	};
+}
+
+export function _post(path, config, actionType) {
+	return (dispatch) => {
+		instance.post(`/${path}/`, config)
+			.then((response) => {
+				dispatch({
+					payload: response.data,
+					type: actionType
 				});
 			})
 			.catch((error) => {

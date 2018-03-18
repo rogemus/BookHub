@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 class HomePage extends Component {
+	componentDidMount() {
+		document.title = 'BookHub | Home Page';
+	}
+
 	render() {
 		return (
 			<div>

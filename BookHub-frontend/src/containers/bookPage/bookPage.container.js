@@ -11,8 +11,14 @@ class BookPage extends Component {
 
 	renderBookDetails() {
 		if (!isEmpty(this.props.book)) {
+			this.updatePageTitle();
+
 			return <BookDetails book={this.props.book}/>;
 		}
+	}
+
+	updatePageTitle() {
+		document.title = `BookHub | ${this.props.book.title}`;
 	}
 
 	render() {

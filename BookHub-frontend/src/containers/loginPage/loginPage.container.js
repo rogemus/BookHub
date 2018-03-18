@@ -47,6 +47,7 @@ class LoginPage extends Component {
 }
 
 function mapStateToProps(state) {
+	/* TODO */
 	return {
 		user: state.book.bookData
 	};

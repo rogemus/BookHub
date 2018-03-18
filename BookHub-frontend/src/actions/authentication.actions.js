@@ -8,5 +8,6 @@ export function postUserCredential(credential) {
 		type: LOG_IN_USER
 	};
 
+	/* TODO */
 	return _post(config.path, config.params, config.type);
 }

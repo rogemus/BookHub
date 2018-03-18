@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {Container} from 'semantic-ui-react';
 import {
-	BrowserRouter as Router,
+	HashRouter as Router,
 	Route,
 	Switch
 } from 'react-router-dom';

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getBooks} from '../../actions/books.actions';
 import isEmpty from 'lodash/isEmpty';
-import './listing.css';
+import './booksListing.styles.css';
 import ListingItem from '../../components/listingItem/listingItem.component';
 
 class BookListing extends Component {

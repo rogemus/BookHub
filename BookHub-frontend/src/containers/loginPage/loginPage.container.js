@@ -30,6 +30,7 @@ class LoginPage extends Component {
 		};
 
 		$event.preventDefault();
+		/* TODO BOOK-33 */
 		this.props.postUserCredential(userData);
 	}
 
@@ -47,7 +48,7 @@ class LoginPage extends Component {
 }
 
 function mapStateToProps(state) {
-	/* TODO */
+	/* TODO BOOK-33 */
 	return {
 		user: state.book.bookData
 	};

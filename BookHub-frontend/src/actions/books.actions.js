@@ -8,5 +8,5 @@ export function getBooks(filters) {
 		params: filters || {}
 	};
 
-	return _get(config.path, {params: config.params}, config.type);
+	return _get(config.path, config.params, config.type);
 }

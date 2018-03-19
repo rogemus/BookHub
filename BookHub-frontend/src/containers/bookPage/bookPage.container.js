@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getBook} from '../../actions/book.action';
+import {getBook} from '../../actions/book.actions';
 import isEmpty from 'lodash/isEmpty';
 import BookDetails from '../../components/bookDetails/bookDetails.componnet';
 

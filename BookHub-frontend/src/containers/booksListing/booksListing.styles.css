@@ -1,0 +1,12 @@
+.listing {
+    display: flex;
+}
+
+.listing .card {
+    margin: 0 15px 0 0;
+    max-width: 33.3333%;
+}
+
+.listing .card:nth-child(3n) {
+    margin: 0;
+}

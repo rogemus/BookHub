@@ -1,3 +1,6 @@
+from textwrap import shorten
+
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -14,4 +17,4 @@ class Comment(models.Model):
     is_removed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.text[:30]}{"..." if len(self.text) > 30 else ""}'
+        return shorten(self.text, width=settings.COMMENT_SNIPPET_LENGTH, placeholder='...')

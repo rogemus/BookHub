@@ -46,6 +46,7 @@ PROJECT_APPS = [
 
 EXTENSION_APPS = [
     'rest_framework',
+    'django_filters',
     'isbn_field',
 ]
 

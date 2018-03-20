@@ -17,11 +17,10 @@
   "rules": {
     "indent": [
       "error",
-      "tab"
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
+      "tab",
+      {
+        "SwitchCase": 1
+      }
     ],
     "quotes": [
       "error",
@@ -31,6 +30,7 @@
       "error",
       "always"
     ],
-    "no-unused-vars": 0
+    "no-unused-vars": 0,
+    "no-console": 0
   }
 }

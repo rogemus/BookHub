@@ -5,7 +5,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 require('babel-polyfill');
 
-module.exports = (options) => {
+module.exports = () => {
 	return {
 		entry: {
 			'bundle': ['babel-polyfill', './src/index.js']
@@ -40,6 +40,20 @@ module.exports = (options) => {
 						{loader: 'css-loader', options: {importLoaders: 1}},
 						'postcss-loader'
 					]
+				},
+				{
+					test: /\.(eot|svg|ttf|woff|woff2)$/,
+					loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
+				},
+				{
+					test: /\.(png|jp(e*)g)$/,
+					use: [{
+						loader: 'url-loader',
+						options: {
+							limit: 8000,
+							name: 'url-loader?name=images/[name].[ext]'
+						}
+					}]
 				}
 			]
 		},
@@ -47,7 +61,8 @@ module.exports = (options) => {
 			new StyleLintPlugin({
 				configFile: '.stylelintrc.json'
 			}),
-			new FriendlyErrorsWebpackPlugin()
+			new FriendlyErrorsWebpackPlugin(),
+			//new BundleAnalyzerPlugin()
 		],
 		devtool: 'source-map',
 		node: {

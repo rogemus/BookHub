@@ -21,9 +21,9 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = (
+            'id',
             'first_name',
             'last_name',
-            'api_url'
         )
 
 
@@ -31,9 +31,9 @@ class PublisherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publisher
         fields = (
+            'id',
             'name',
             'website',
-            'api_url'
         )
 
 
@@ -55,7 +55,7 @@ class BookSerializer(serializers.ModelSerializer):
             'language',
             'isbn',
             'last_comments',
-            'api_url'
+            'api_url',
         )
 
     def get_last_comments(self, book):

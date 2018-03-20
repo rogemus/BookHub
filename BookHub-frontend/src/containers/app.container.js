@@ -12,6 +12,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 import HomePage from './homePage/homePage.container';
 import BookPage from './bookPage/bookPage.container';
+import LoginPage from './loginPage/loginPage.container';
 
 const App = ({store}) => (
 	<Provider store={store}>
@@ -20,6 +21,7 @@ const App = ({store}) => (
 				<Switch>
 					<Route exact path="/" component={HomePage}/>
 					<Route path="/books/:id" component={BookPage}/>
+					<Route exact path="/login" component={LoginPage}/>
 				</Switch>
 			</Container>
 		</Router>

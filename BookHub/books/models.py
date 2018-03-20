@@ -1,5 +1,6 @@
 import uuid
 
+from django.conf import settings
 from django.db import models
 from isbn_field import ISBNField
 
@@ -36,7 +37,7 @@ class Book(models.Model):
     language = models.CharField(max_length=2, choices=BOOK_LANGUAGE_CHOICES, default='PL')
     isbn = ISBNField(db_index=True)
 
-    def get_last_comments(self, qt=3):
+    def get_last_comments(self, qt=settings.BOOK_LAST_COMMENTS):
         return self.comments.filter(is_removed=False, is_public=True).order_by('-submit_date')[:qt]
 
     def __str__(self):

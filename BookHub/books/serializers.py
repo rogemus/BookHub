@@ -55,7 +55,6 @@ class BookSerializer(serializers.ModelSerializer):
             'language',
             'isbn',
             'last_comments',
-            'api_url',
         )
 
     def get_last_comments(self, book):

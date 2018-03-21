@@ -4,61 +4,14 @@ import json
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.test import APITestCase
 
 from books.models import Book, Author, Publisher
+from books.tests.book_test_helper import BookBaseTest
 
 User = get_user_model()
 
 
-class BookHubAPITestCase(APITestCase):
-
-    def assert_paginated_response(self, response: Response, expected_results: [dict]):
-        """
-        Assertion function for paginated responses
-        """
-        self.assertEqual(
-            json.loads(response.content.decode('utf8')),
-            {
-                'count': len(expected_results),
-                'next': None,
-                'previous': None,
-                'results': expected_results
-            }
-        )
-
-    def create_author_json_reposnse(self, author: Author):
-        """
-        Create json like response object
-        """
-        return {
-            'id': author.id,
-            'first_name': author.first_name,
-            'last_name': author.last_name
-        }
-
-    def create_book_json_response(self, book: Book, publisher: Publisher, authors: [dict]):
-        """
-        Create json like response object
-        """
-        return {
-            'title': book.title,
-            'authors': authors,
-            'publisher': {
-                'name': publisher.name,
-                'id': publisher.pk,
-                'website': publisher.website
-            },
-            'publication_date': f'{book.publication_date.date()}',
-            'image_url': book.image_url,
-            'cover': book.cover,
-            'language': book.language,
-            'isbn': book.isbn,
-        }
-
-
-class AuthorAPIViewTests(BookHubAPITestCase):
+class AuthorAPIViewTests(BookBaseTest):
     def setUp(self):
         self.author = Author.objects.create(first_name='Name', last_name='Surname')
 
@@ -88,7 +41,7 @@ class AuthorAPIViewTests(BookHubAPITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(
-            json.loads(response.content.decode('utf8')),
+            json.loads(response.content),
             {
                 'first_name': self.author.first_name,
                 'id': self.author.pk,
@@ -97,7 +50,7 @@ class AuthorAPIViewTests(BookHubAPITestCase):
         )
 
 
-class AuthorAPIViewFilterTests(BookHubAPITestCase):
+class AuthorAPIViewFilterTests(BookBaseTest):
 
     def setUp(self):
         self.anabel = Author.objects.create(first_name='Anabel', last_name='Wol')
@@ -156,7 +109,7 @@ class AuthorAPIViewFilterTests(BookHubAPITestCase):
                 )
 
 
-class PublisherAPIViewTests(BookHubAPITestCase):
+class PublisherAPIViewTests(BookBaseTest):
     def setUp(self):
         self.publisher_record = Publisher.objects.create(name='Super Pub', website='https://example.com/')
 
@@ -186,7 +139,7 @@ class PublisherAPIViewTests(BookHubAPITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(
-            json.loads(response.content.decode('utf8')),
+            json.loads(response.content),
             {
                 'name': self.publisher_record.name,
                 'id': self.publisher_record.pk,
@@ -195,7 +148,7 @@ class PublisherAPIViewTests(BookHubAPITestCase):
         )
 
 
-class PublisherAPIViewFilterTests(BookHubAPITestCase):
+class PublisherAPIViewFilterTests(BookBaseTest):
 
     def test_publishers_filtered_by_name(self):
         """
@@ -218,48 +171,37 @@ class PublisherAPIViewFilterTests(BookHubAPITestCase):
         )
 
 
-class BookAPIViewTests(BookHubAPITestCase):
-    def setUp(self):
-        self.author_record = Author.objects.create(first_name='Name', last_name='Surname')
-        self.publisher_record = Publisher.objects.create(name='Super Pub', website='https://example.com/')
-        self.book_record = Book.objects.create(
-            title='Super Book',
-            publisher=self.publisher_record,
-            description='Desc...',
-            publication_date=datetime.datetime.now(),
-            image_url='https://example.com/',
-            isbn='9781491989333'
-        )
-        self.book_record.authors.add(self.author_record)
+class BookAPIViewTests(BookBaseTest):
 
     def test_books_listing(self):
         """
         Ensure we can list books.
         """
+        self.maxDiff = None
         response = self.client.get(reverse('book-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assert_paginated_response(
             response=response,
             expected_results=[
-                self.create_book_json_response(self.book_record, self.publisher_record,
-                                               [self.create_author_json_reposnse(self.author_record)])]
+                self.create_book_json_response(self.book, self.publisher,
+                                               [self.create_author_json_reposnse(self.author)])]
         )
 
     def test_show_book(self):
         """
         Ensure we can get book detail.
         """
-        response = self.client.get(reverse('book-detail', kwargs={'pk': self.book_record.pk}))
+        response = self.client.get(reverse('book-detail', kwargs={'pk': self.book.pk}))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(
-            json.loads(response.content.decode('utf8')),
-            self.create_book_json_response(self.book_record, self.publisher_record,
-                                           [self.create_author_json_reposnse(self.author_record)])
+            json.loads(response.content),
+            self.create_book_json_response(self.book, self.publisher,
+                                           [self.create_author_json_reposnse(self.author)])
         )
 
 
-class BookAPIViewFilterTests(BookHubAPITestCase):
+class BookAPIViewFilterTests(BookBaseTest):
     def setUp(self):
         self.publisher_record = Publisher.objects.create(name='Super Pub', website='https://example.com/')
         self.book_record_1 = Book.objects.create(
@@ -288,6 +230,7 @@ class BookAPIViewFilterTests(BookHubAPITestCase):
         """
         Ensure query param filtering by author first name works
         """
+        self.maxDiff = None
         response = self.client.get(reverse('book-list'), {'author_first_name': 'Anabel'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assert_paginated_response(

@@ -5,8 +5,6 @@ env:
   - DJANGO_SETTINGS_MODULE='BookHub.settings.local'
 install:
   - pip install -r BookHub/requirements/test.txt
-before_script:
-  - python BookHub/manage.py migrate
 script:
   - flake8 BookHub
-  - python BookHub/manage.py test
+  - python BookHub/manage.py test BookHub

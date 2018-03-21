@@ -1,5 +1,6 @@
 import uuid
 
+from django.conf import settings
 from django.db import models
 from isbn_field import ISBNField
 
@@ -25,7 +26,7 @@ BOOK_LANGUAGE_CHOICES = (('PL', 'Polish'), ('EN', 'English'),)
 
 
 class Book(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name='catalogue number')
     title = models.CharField(db_index=True, max_length=100)
     authors = models.ManyToManyField(Author)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
@@ -35,6 +36,9 @@ class Book(models.Model):
     cover = models.CharField(max_length=9, choices=COVER_TYPES_CHOICES, default='paperback')
     language = models.CharField(max_length=2, choices=BOOK_LANGUAGE_CHOICES, default='PL')
     isbn = ISBNField(db_index=True)
+
+    def get_last_comments(self, qt=settings.BOOK_LAST_COMMENTS):
+        return self.comments.filter(is_removed=False, is_public=True).order_by('-submit_date')[:qt]
 
     def __str__(self):
         return self.title

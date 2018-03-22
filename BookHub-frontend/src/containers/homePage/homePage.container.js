@@ -8,7 +8,7 @@ class HomePage extends Component {
 			<div>
 				<h1>Home</h1>
 				<BooksListing/>
-				<RegisterPage/>
+				{/* <RegisterPage/> */}
 			</div>
 		);
 	}

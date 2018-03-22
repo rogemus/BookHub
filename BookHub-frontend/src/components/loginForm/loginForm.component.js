@@ -1,29 +1,12 @@
 import React from 'react';
-import {Form,Button} from 'semantic-ui-react';
+import {
+	Form,
+	Button
+} from 'semantic-ui-react';
 
 export default (props) => {
-	return(
+	return (
 		<Form onSubmit={props.handleSubmit}>
-			<Form.Field>
-				<label>Name</label>
-				<input 
-					placeholder='Name'
-					value={props.values.name}
-					onChange={props.handleChange}
-					name='name'
-					type='text'
-				/>
-			</Form.Field>
-			<Form.Field>
-				<label>Surname</label>
-				<input 
-					placeholder='Surname'
-					value={props.values.surname}
-					onChange={props.handleChange}
-					name='surname'
-					type='text'
-				/>
-			</Form.Field>
 			<Form.Field required>
 				<label>Email</label>
 				<input

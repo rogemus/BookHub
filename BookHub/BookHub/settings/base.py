@@ -37,7 +37,11 @@ BASE_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+PROJECT_APPS = [
     'books.apps.BooksConfig',
+    'comments.apps.CommentsConfig',
 ]
 
 EXTENSION_APPS = [
@@ -46,7 +50,7 @@ EXTENSION_APPS = [
     'isbn_field',
 ]
 
-INSTALLED_APPS = BASE_APPS + EXTENSION_APPS
+INSTALLED_APPS = BASE_APPS + PROJECT_APPS + EXTENSION_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,3 +136,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
     'URL_FIELD_NAME': 'api_url',
 }
+
+COMMENT_SNIPPET_LENGTH = 30
+
+BOOK_LAST_COMMENTS = 3

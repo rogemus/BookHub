@@ -1,6 +1,20 @@
 from rest_framework import serializers
+from rest_framework_nested.serializers import NestedHyperlinkedModelSerializer
 
 from books.models import Book, Author, Publisher
+from comments.models import Comment
+
+
+class CommentSerializer(NestedHyperlinkedModelSerializer):
+    author = serializers.StringRelatedField()
+
+    class Meta:
+        model = Comment
+        fields = (
+            'author',
+            'text',
+            'submit_date',
+        )
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -26,6 +40,7 @@ class PublisherSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     authors = AuthorSerializer(many=True, read_only=True)
     publisher = PublisherSerializer(read_only=True)
+    last_comments = serializers.SerializerMethodField(source='comments', read_only=True)
 
     class Meta:
         model = Book
@@ -39,4 +54,9 @@ class BookSerializer(serializers.ModelSerializer):
             'cover',
             'language',
             'isbn',
+            'last_comments',
         )
+
+    def get_last_comments(self, book):
+        serializer = CommentSerializer(book.get_last_comments(3), many=True, read_only=True)
+        return serializer.data

@@ -1,10 +1,22 @@
 version: '3'
 
 services:
-  web:
-    build: .
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+  backend:
+    build: BookHub
+    image: bookhub/backend
+    container_name: bookhub-backend
     volumes:
-      - .:/code
+      - ./BookHub:/code
+    ports:
+      - "8080:8000"
+
+  frontend:
+    build: BookHub-frontend
+    image: bookhub/frontend
+    container_name: bookhub-frontend
+    volumes:
+      - ./BookHub-frontend:/code
     ports:
       - "8000:8000"
+    links:
+      - backend

@@ -2,7 +2,7 @@ FROM python:3.6-slim
 
 COPY . /code/
 
-WORKDIR /code/BookHub/
+WORKDIR /code/
 
 RUN pip install -r requirements/dev.txt
 

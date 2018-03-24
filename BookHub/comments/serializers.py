@@ -29,4 +29,5 @@ class CommentSerializer(NestedHyperlinkedModelSerializer):
             'api_url': {
                 'view_name': 'book-comments-detail',
             },
+
         }

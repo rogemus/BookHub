@@ -28,7 +28,8 @@ class AuthorAPIViewTests(BookBaseTest):
                 {
                     'first_name': self.author.first_name,
                     'id': self.author.pk,
-                    'last_name': self.author.last_name
+                    'last_name': self.author.last_name,
+                    'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': self.author.pk})),
                 }
             ]
         )
@@ -45,7 +46,9 @@ class AuthorAPIViewTests(BookBaseTest):
             {
                 'first_name': self.author.first_name,
                 'id': self.author.pk,
-                'last_name': self.author.last_name
+                'last_name': self.author.last_name,
+                'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': self.author.pk})),
+
             }
         )
 
@@ -68,7 +71,8 @@ class AuthorAPIViewFilterTests(BookBaseTest):
                 {
                     'first_name': self.anabel.first_name,
                     'id': self.anabel.pk,
-                    'last_name': self.anabel.last_name
+                    'last_name': self.anabel.last_name,
+                    'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': self.anabel.pk})),
                 }
             ]
         )
@@ -85,7 +89,8 @@ class AuthorAPIViewFilterTests(BookBaseTest):
                 {
                     'first_name': self.casandra.first_name,
                     'id': self.casandra.pk,
-                    'last_name': self.casandra.last_name
+                    'last_name': self.casandra.last_name,
+                    'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': self.casandra.pk})),
                 }
             ]
         )
@@ -98,7 +103,11 @@ class AuthorAPIViewFilterTests(BookBaseTest):
             ({'first_name': 'Anabel', 'last_name': 'Strange'}, []),
             ({'first_name': 'Anabel', 'last_name': 'Wol'}, [{'first_name': self.anabel.first_name,
                                                              'id': self.anabel.pk,
-                                                             'last_name': self.anabel.last_name}]),
+                                                             'last_name': self.anabel.last_name,
+                                                             'api_url': self.get_api_url(reverse('author-detail',
+                                                                                                 kwargs={
+                                                                                                     'pk': self.anabel.pk})),
+                                                             }]),
         ]:
             with self.subTest(filter=query_filter, expected=expected):
                 response = self.client.get(reverse('author-list'), query_filter)
@@ -126,7 +135,8 @@ class PublisherAPIViewTests(BookBaseTest):
                 {
                     'name': self.publisher_record.name,
                     'id': self.publisher_record.pk,
-                    'website': self.publisher_record.website
+                    'website': self.publisher_record.website,
+                    'api_url': self.get_api_url(reverse('publisher-detail', kwargs={'pk': self.publisher_record.pk}))
                 }
             ]
         )
@@ -143,7 +153,8 @@ class PublisherAPIViewTests(BookBaseTest):
             {
                 'name': self.publisher_record.name,
                 'id': self.publisher_record.pk,
-                'website': self.publisher_record.website
+                'website': self.publisher_record.website,
+                'api_url': self.get_api_url(reverse('publisher-detail', kwargs={'pk': self.publisher_record.pk}))
             }
         )
 
@@ -165,7 +176,8 @@ class PublisherAPIViewFilterTests(BookBaseTest):
                 {
                     'name': publisher.name,
                     'id': publisher.pk,
-                    'website': publisher.website
+                    'website': publisher.website,
+                    'api_url': self.get_api_url(reverse('publisher-detail', kwargs={'pk': publisher.pk}))
                 }
             ]
         )

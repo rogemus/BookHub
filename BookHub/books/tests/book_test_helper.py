@@ -1,8 +1,10 @@
 import json
+from urllib.parse import urljoin
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.urls import reverse
 from django.utils import timezone
 from rest_framework.response import Response
 
@@ -63,10 +65,12 @@ class BookBaseTest(TestCase):
         return {
             'id': author.id,
             'first_name': author.first_name,
-            'last_name': author.last_name
+            'last_name': author.last_name,
+            'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': author.pk})),
+
         }
 
-    def create_commment_json_response(self, comment: Comment):
+    def create_commment_json_response(self, books_id: str, comment: Comment):
         """
         Create json like response object
         """
@@ -74,6 +78,8 @@ class BookBaseTest(TestCase):
             'author': f'{comment.author}',
             'text': comment.text,
             'submit_date': f'{comment.submit_date.date()}T{comment.submit_date.time()}Z',
+            'api_url': self.get_api_url(reverse('book-comments-detail',
+                                                kwargs={'books_pk': books_id,'pk': comment.pk})),
         }
 
     def create_book_json_response(self, book: Book, publisher: Publisher, authors: [dict]):
@@ -87,14 +93,20 @@ class BookBaseTest(TestCase):
             'publisher': {
                 'name': publisher.name,
                 'id': publisher.pk,
-                'website': publisher.website
+                'website': publisher.website,
+                'api_url': self.get_api_url(reverse('publisher-detail', kwargs={'pk': publisher.pk})),
             },
             'publication_date': f'{book.publication_date.date()}',
             'image_url': book.image_url,
             'cover': book.cover,
             'language': book.language,
             'last_comments': [
-                self.create_commment_json_response(comment) for comment in self._get_last_comments()
+                self.create_commment_json_response(str(book.id), comment) for comment in self._get_last_comments()
             ],
             'isbn': book.isbn,
+            'api_url': self.get_api_url(reverse('book-detail', kwargs={'pk': f'{book.pk}'})),
         }
+
+
+    def get_api_url(self, path):
+        return urljoin('http://testserver', path)

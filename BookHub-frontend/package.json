@@ -8,8 +8,8 @@
     "build": "webpack --config webpack.dev.js",
     "build:prod": "webpack --config webpack.prod.js",
     "watch": "webpack --watch --config webpack.dev.js",
-    "lint": "eslint \"./src/**/*.js\"",
-    "dev:server": "node_modules/.bin/webpack-dev-server"
+    "lint": "./node_modules/.bin/eslint --ext .js src",
+    "dev:server": "./node_modules/.bin/webpack-dev-server"
   },
   "author": "Kacper Rogowski",
   "dependencies": {

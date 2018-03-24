@@ -1,9 +1,15 @@
 from rest_framework import serializers
+from rest_framework_nested.serializers import NestedHyperlinkedModelSerializer
+
 from comments.models import Comment
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer(NestedHyperlinkedModelSerializer):
     author = serializers.StringRelatedField()
+
+    parent_lookup_kwargs = {
+        'books_pk': 'book__pk',
+    }
 
     class Meta:
         model = Comment
@@ -12,8 +18,15 @@ class CommentSerializer(serializers.ModelSerializer):
             'author',
             'text',
             'submit_date',
+            'api_url',
+        )
+        read_only_fields = (
+            'id',
+            'author',
+            'submit_date',
         )
         extra_kwargs = {
-            'id': {'read_only': True},
-            'author': {'read_only': True}
+            'api_url': {
+                'view_name': 'book-comments-detail',
+            },
         }

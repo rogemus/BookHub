@@ -78,8 +78,9 @@ class BookBaseTest(TestCase):
             'author': f'{comment.author}',
             'text': comment.text,
             'submit_date': f'{comment.submit_date.date()}T{comment.submit_date.time()}Z',
-            'api_url': self.get_api_url(reverse('book-comments-detail',
-                                                kwargs={'books_pk': books_id,'pk': comment.pk})),
+            'api_url': self.get_api_url(
+                reverse('book-comments-detail', kwargs={'books_pk': books_id, 'pk': comment.pk})
+            ),
         }
 
     def create_book_json_response(self, book: Book, publisher: Publisher, authors: [dict]):
@@ -107,6 +108,21 @@ class BookBaseTest(TestCase):
             'api_url': self.get_api_url(reverse('book-detail', kwargs={'pk': f'{book.pk}'})),
         }
 
-
     def get_api_url(self, path):
         return urljoin('http://testserver', path)
+
+    def prepare_author_object(self, author):
+        return {
+            'first_name': author.first_name,
+            'id': author.pk,
+            'last_name': author.last_name,
+            'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': author.pk})),
+        }
+
+    def prepare_publisher_object(self, publisher):
+        return {
+            'name': publisher.name,
+            'id': publisher.pk,
+            'website': publisher.website,
+            'api_url': self.get_api_url(reverse('publisher-detail', kwargs={'pk': publisher.pk}))
+        }

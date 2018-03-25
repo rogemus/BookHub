@@ -24,14 +24,7 @@ class AuthorAPIViewTests(BookBaseTest):
 
         self.assert_paginated_response(
             response=response,
-            expected_results=[
-                {
-                    'first_name': self.author.first_name,
-                    'id': self.author.pk,
-                    'last_name': self.author.last_name,
-                    'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': self.author.pk})),
-                }
-            ]
+            expected_results=[self.prepare_author_object(self.author)]
         )
 
     def test_show_author(self):
@@ -43,13 +36,7 @@ class AuthorAPIViewTests(BookBaseTest):
 
         self.assertEqual(
             json.loads(response.content),
-            {
-                'first_name': self.author.first_name,
-                'id': self.author.pk,
-                'last_name': self.author.last_name,
-                'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': self.author.pk})),
-
-            }
+            self.prepare_author_object(self.author)
         )
 
 
@@ -67,14 +54,7 @@ class AuthorAPIViewFilterTests(BookBaseTest):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assert_paginated_response(
             response=response,
-            expected_results=[
-                {
-                    'first_name': self.anabel.first_name,
-                    'id': self.anabel.pk,
-                    'last_name': self.anabel.last_name,
-                    'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': self.anabel.pk})),
-                }
-            ]
+            expected_results=[self.prepare_author_object(self.anabel)]
         )
 
     def test_author_filtered_by_last_name(self):
@@ -85,14 +65,7 @@ class AuthorAPIViewFilterTests(BookBaseTest):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assert_paginated_response(
             response=response,
-            expected_results=[
-                {
-                    'first_name': self.casandra.first_name,
-                    'id': self.casandra.pk,
-                    'last_name': self.casandra.last_name,
-                    'api_url': self.get_api_url(reverse('author-detail', kwargs={'pk': self.casandra.pk})),
-                }
-            ]
+            expected_results=[self.prepare_author_object(self.casandra)]
         )
 
     def test_author_filtered_by_last_name_and_first_name(self):
@@ -101,13 +74,7 @@ class AuthorAPIViewFilterTests(BookBaseTest):
         """
         for query_filter, expected in [
             ({'first_name': 'Anabel', 'last_name': 'Strange'}, []),
-            ({'first_name': 'Anabel', 'last_name': 'Wol'}, [{'first_name': self.anabel.first_name,
-                                                             'id': self.anabel.pk,
-                                                             'last_name': self.anabel.last_name,
-                                                             'api_url': self.get_api_url(reverse('author-detail',
-                                                                                                 kwargs={
-                                                                                                     'pk': self.anabel.pk})),
-                                                             }]),
+            ({'first_name': 'Anabel', 'last_name': 'Wol'}, [self.prepare_author_object(self.anabel)]),
         ]:
             with self.subTest(filter=query_filter, expected=expected):
                 response = self.client.get(reverse('author-list'), query_filter)
@@ -131,14 +98,7 @@ class PublisherAPIViewTests(BookBaseTest):
 
         self.assert_paginated_response(
             response=response,
-            expected_results=[
-                {
-                    'name': self.publisher_record.name,
-                    'id': self.publisher_record.pk,
-                    'website': self.publisher_record.website,
-                    'api_url': self.get_api_url(reverse('publisher-detail', kwargs={'pk': self.publisher_record.pk}))
-                }
-            ]
+            expected_results=[self.prepare_publisher_object(self.publisher_record)]
         )
 
     def test_show_publisher(self):
@@ -150,12 +110,7 @@ class PublisherAPIViewTests(BookBaseTest):
 
         self.assertEqual(
             json.loads(response.content),
-            {
-                'name': self.publisher_record.name,
-                'id': self.publisher_record.pk,
-                'website': self.publisher_record.website,
-                'api_url': self.get_api_url(reverse('publisher-detail', kwargs={'pk': self.publisher_record.pk}))
-            }
+            self.prepare_publisher_object(self.publisher_record)
         )
 
 
@@ -172,14 +127,7 @@ class PublisherAPIViewFilterTests(BookBaseTest):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assert_paginated_response(
             response=response,
-            expected_results=[
-                {
-                    'name': publisher.name,
-                    'id': publisher.pk,
-                    'website': publisher.website,
-                    'api_url': self.get_api_url(reverse('publisher-detail', kwargs={'pk': publisher.pk}))
-                }
-            ]
+            expected_results=[self.prepare_publisher_object(publisher)]
         )
 
 

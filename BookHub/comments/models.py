@@ -16,5 +16,10 @@ class Comment(models.Model):
     is_public = models.BooleanField(default=True)
     is_removed = models.BooleanField(default=False)
 
+    def mark_as_removed(self):
+        self.is_removed = True
+        self.is_public = False
+        self.save(update_fields=['is_removed', 'is_public', ])
+
     def __str__(self):
         return shorten(self.text, width=settings.COMMENT_SNIPPET_LENGTH, placeholder='...')

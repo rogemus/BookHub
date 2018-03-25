@@ -42,6 +42,7 @@ BASE_APPS = [
 PROJECT_APPS = [
     'books.apps.BooksConfig',
     'comments.apps.CommentsConfig',
+    'users.apps.UsersConfig',
 ]
 
 EXTENSION_APPS = [

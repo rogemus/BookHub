@@ -9,8 +9,8 @@ class LoginPage extends Component {
 		super(props);
 
 		this.state = {
-			username: 'admin',
-			password: 'qazwsx123'
+			username: '',
+			password: ''
 		};
 	}
 

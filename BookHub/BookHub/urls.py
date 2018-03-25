@@ -8,6 +8,7 @@ from books import views
 from books.views import BookHubApi
 from comments.views import CommentViewSet
 from users.views import UserViewSet
+from book_hub_auth import urls as auth_urls
 
 
 class DocumentedRouter(routers.DefaultRouter):
@@ -30,6 +31,7 @@ api_urlpatterns = [
 ]
 
 urlpatterns = [
+    path('auth/', include(auth_urls)),
     path('api/', include(api_urlpatterns)),
     path('admin/', admin.site.urls),
 ]

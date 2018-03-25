@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import datetime
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -40,6 +42,7 @@ BASE_APPS = [
 ]
 
 PROJECT_APPS = [
+    'book_hub_auth.apps.BookHubAuthConfig',
     'books.apps.BooksConfig',
     'comments.apps.CommentsConfig',
     'users.apps.UsersConfig',
@@ -130,12 +133,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
+    'DEFAULT_PERMISSION_CLASSES': (
+        'books.permissions.ReadOnlyPermission',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 50,
     'URL_FIELD_NAME': 'api_url',
+}
+
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=24),
 }
 
 COMMENT_SNIPPET_LENGTH = 30

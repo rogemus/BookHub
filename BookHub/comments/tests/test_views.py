@@ -1,33 +1,16 @@
-import datetime
 import json
 import uuid
 
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
-
-from books.models import Author, Publisher, Book
 from comments.models import Comment
+from comments.tests.comment_test_helper import CommentBaseTest
 
 User = get_user_model()
 
 
-class CommentViewTest(APITestCase):
-    def setUp(self):
-        self.user = User.objects.create(username='test_user', email='ecs@email.com')
-
-        self.author_record = Author.objects.create(first_name='Name', last_name='Surname')
-        self.publisher_record = Publisher.objects.create(name='Super Pub', website='https://example.com/')
-        self.book = Book.objects.create(
-            title='Super Book',
-            publisher=self.publisher_record,
-            description='Desc...',
-            publication_date=datetime.datetime.now(),
-            image_url='https://example.com/',
-            isbn='9781491989333',
-        )
-        self.book.authors.add(self.author_record)
+class CommentViewTest(CommentBaseTest):
 
     def test_comments_listing_for_existing_book(self):
         """
@@ -35,7 +18,7 @@ class CommentViewTest(APITestCase):
         """
         comment = Comment.objects.create(
             book=self.book,
-            author=self.user,
+            author=self.user_cristy,
             text='This is comment',
         )
         response = self.client.get(reverse('book-comments-list', kwargs={'books_pk': self.book.pk}))
@@ -50,16 +33,16 @@ class CommentViewTest(APITestCase):
         """
         comment = Comment.objects.create(
             book=self.book,
-            author=self.user,
+            author=self.user_cristy,
             text='This is comment',
             is_removed=False,
             is_public=True,
         )
-        Comment.objects.create(book=self.book, author=self.user, is_removed=True, is_public=True,
+        Comment.objects.create(book=self.book, author=self.user_cristy, is_removed=True, is_public=True,
                                text='deleted_comment', )
-        Comment.objects.create(book=self.book, author=self.user, is_removed=False, is_public=False,
+        Comment.objects.create(book=self.book, author=self.user_cristy, is_removed=False, is_public=False,
                                text='non_public_comment', )
-        Comment.objects.create(book=self.book, author=self.user, is_removed=True, is_public=False,
+        Comment.objects.create(book=self.book, author=self.user_cristy, is_removed=True, is_public=False,
                                text='non_public_and_deleted_comment', )
 
         response = self.client.get(reverse('book-comments-list', kwargs={'books_pk': self.book.pk}))
@@ -72,7 +55,7 @@ class CommentViewTest(APITestCase):
         """
         Test should check if logged in users can add comments
         """
-        self.client.force_authenticate(self.user)
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.get_token())
         response = self.client.post(
             reverse('book-comments-list', kwargs={'books_pk': self.book.pk}),
             {'text': 'New comment'},
@@ -85,14 +68,14 @@ class CommentViewTest(APITestCase):
         """
         Test should check if user creating comment is it owner
         """
-        self.client.force_authenticate(self.user)
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.get_token())
         response = self.client.post(
             reverse('book-comments-list', kwargs={'books_pk': self.book.pk}),
             {'text': 'New comment'},
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         data = json.loads(response.content)
-        self.assertEqual(data['author'], self.user.username)
+        self.assertEqual(data['author'], self.user_cristy.username)
 
     def test_if_unauthenticated_user_cant_add_comments(self):
         """
@@ -102,12 +85,79 @@ class CommentViewTest(APITestCase):
             reverse('book-comments-list', kwargs={'books_pk': self.book.pk}),
             {'text': 'New comment'},
         )
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class CommentViewPermissionTest(CommentBaseTest):
+
+    def setUp(self):
+        super(CommentViewPermissionTest, self).setUp()
+        self.cristy_comment = Comment.objects.create(
+            book=self.book,
+            author=self.user_cristy,
+            text='This is Cristy comment',
+        )
+        self.user_jack = User.objects.create_user(
+            'jack',
+            'jack@email.com',
+            'password',
+        )
+        self.jack_comment = Comment.objects.create(
+            book=self.book,
+            author=self.user_jack,
+            text='This is Jack comment',
+        )
+
+    def test_authenticated_user_should_edit_his_comment_with_patch_method(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.get_token())
+        response = self.client.patch(
+            reverse('book-comments-detail', kwargs={'books_pk': self.book.pk, 'pk': self.cristy_comment.pk}),
+            {'text': 'Comment edited'},
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(json.loads(response.content)['text'], 'Comment edited')
+
+    def test_authenticated_user_should_edit_his_comment_with_put_method(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.get_token())
+        response = self.client.put(
+            reverse('book-comments-detail', kwargs={'books_pk': self.book.pk, 'pk': self.cristy_comment.pk}),
+            {'text': 'Comment edited'},
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(json.loads(response.content)['text'], 'Comment edited')
+
+    def test_authenticated_user_should_not_be_able_to_edit_not_owned_comment_with_patch_method(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.get_token())
+        response = self.client.patch(
+            reverse('book-comments-detail', kwargs={'books_pk': self.book.pk, 'pk': self.jack_comment.pk}),
+            {'text': 'Comment edited'},
+        )
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_authenticated_user_should_not_be_able_to_edit_not_owned_comment_with_put_method(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.get_token())
+        response = self.client.put(
+            reverse('book-comments-detail', kwargs={'books_pk': self.book.pk, 'pk': self.jack_comment.pk}),
+            {'text': 'Comment edited'},
+        )
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_authenticated_user_should_delete_his_comment(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.get_token())
+        response = self.client.delete(
+            reverse('book-comments-detail', kwargs={'books_pk': self.book.pk, 'pk': self.cristy_comment.pk}),
+        )
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_authenticated_user_should_not_be_able_to_delete_not_owned_comment(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.get_token())
+        response = self.client.delete(
+            reverse('book-comments-detail', kwargs={'books_pk': self.book.pk, 'pk': self.jack_comment.pk}),
+        )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class CommentViewStabilityTest(APITestCase):
-    def setUp(self):
-        self.user = User.objects.create(email='ecs@email.com')
+class CommentViewStabilityTest(CommentBaseTest):
 
     def test_comments_listing_for_non_existing_book(self):
         """
@@ -122,7 +172,7 @@ class CommentViewStabilityTest(APITestCase):
         """
         Test should check if logged in user cant add comment for non existing book
         """
-        self.client.force_authenticate(self.user)
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.get_token())
         response = self.client.post(
             reverse('book-comments-list', kwargs={'books_pk': f'{uuid.uuid4()}'}),
             {'text': 'New comment'},

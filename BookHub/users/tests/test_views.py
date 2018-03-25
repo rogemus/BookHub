@@ -15,7 +15,7 @@ class UserViewSet(APITestCase):
         """
         Create dummy user
         """
-        self.user = User.objects.create(username='test_user', email='example@email.com', password='foobar');
+        self.user = User.objects.create(username='test_user', email='example@email.com', password='foobar')
 
     def test_users_listing_with_existing_user(self):
         """
@@ -68,7 +68,3 @@ class UserViewSet(APITestCase):
         self.assertEqual(response_create.status_code, status.HTTP_201_CREATED)
         response_get = self.client.get(reverse('user-detail', kwargs={'username': 'created_user'}))
         self.assertEqual(response_get.status_code, status.HTTP_200_OK)
-
-
-
-

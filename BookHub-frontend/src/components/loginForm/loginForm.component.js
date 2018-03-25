@@ -8,14 +8,14 @@ export default (props) => {
 	return (
 		<Form onSubmit={props.handleSubmit}>
 			<Form.Field required>
-				<label>Email</label>
+				<label>Username</label>
 				<input
-					placeholder='Email'
+					placeholder='Username'
 					required
-					value={props.values.email}
+					value={props.values.username}
 					onChange={props.handleChange}
-					name='email'
-					type='email'
+					name='username'
+					type='text'
 				/>
 			</Form.Field>
 			<Form.Field required>

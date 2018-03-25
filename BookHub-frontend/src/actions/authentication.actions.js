@@ -1,12 +1,11 @@
 import {_post} from './axios.actions';
-import {LOG_IN_USER} from './types';
+import {GET_TOKEN} from './types';
 
-/* TODO BOOK-33 */
 export function postUserCredential(credential) {
 	const config = {
-		path: 'login',
+		path: 'auth/login',
 		params: credential,
-		type: LOG_IN_USER
+		type: GET_TOKEN
 	};
 
 	return _post(config.path, config.params, config.type);

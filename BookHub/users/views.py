@@ -1,7 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import AllowAny
-from rest_framework.viewsets import GenericViewSet
 
 from users.models import User
 from users.serializers import UserSerializer
@@ -30,4 +29,3 @@ class UserViewSet(CreateListRetrieveViewSet):
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('email', 'username',)
     lookup_field = 'username'
-

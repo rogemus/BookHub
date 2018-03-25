@@ -1,10 +1,23 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {
 	Grid,
 	Image,
 	Divider,
 	Header
 } from 'semantic-ui-react';
+
+const authors = (authors) => {
+	return (
+		authors.map((author) => {
+			return (
+				<span key={author.id}>
+					<Link to={`/listing?authors=${author.id}`}>{`${author.first_name} ${author.last_name}`}</Link>
+				</span>
+			);
+		})
+	);
+};
 
 export default ({book}) => {
 	return (
@@ -16,6 +29,7 @@ export default ({book}) => {
 				<Grid.Column>
 					<Header as='h1'>{book.title}</Header>
 					<Header as='h3'>{book.publisher.name}</Header>
+					<Header as='h5'>{authors(book.authors)}</Header>
 					<Divider/>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam culpa doloremque

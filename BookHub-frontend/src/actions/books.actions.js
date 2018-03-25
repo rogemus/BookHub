@@ -5,7 +5,7 @@ export function getBooks(filters) {
 	const config = {
 		path: 'books',
 		type: GET_BOOKS,
-		params: {}
+		params: filters || {}
 	};
 
 	return _get(config.path, config.params, config.type);

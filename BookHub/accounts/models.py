@@ -7,15 +7,20 @@ from accounts.validators import username_validator
 
 
 class BookHubUser(AbstractUser):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, )
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(
         _('username'),
         max_length=30,
         unique=True,
-        help_text=_('Required. 30 characters or fewer. Letters, digits and ./_ only.'),
+        help_text=_('Required. 30 characters or fewer. Letters, numbers, underscores and periods only.'),
         validators=[username_validator],
         error_messages={
-            'unique': _("A user with that username already exists."),
+            'unique': _("This username is already taken."),
         },
     )
+    email = models.EmailField(unique=True, blank=False)
 
+    class Meta:
+        db_table = 'book_hub_user'
+        verbose_name = 'user'
+        verbose_name_plural = "users"

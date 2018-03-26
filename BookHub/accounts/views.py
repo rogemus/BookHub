@@ -3,19 +3,14 @@ from rest_framework import mixins, viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework_jwt.serializers import JSONWebTokenSerializer
 from rest_framework_jwt.views import ObtainJSONWebToken
+from accounts.serializers import UserCreateSerializer
 
-from accounts.models import BookHubUser
-from accounts.serializers import BookHubUserSerializer
+User = get_user_model()
 
 
-
-class CreateListRetrieveViewSet(mixins.CreateModelMixin,
-                                mixins.ListModelMixin,
-                                mixins.RetrieveModelMixin,
-                                mixins.DestroyModelMixin,
-                                viewsets.GenericViewSet):
+class CreateViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
-    A viewset that provides `retrieve`, `create`, `delete` and `list` actions.
+    A viewset that provides only `create` action.
 
     To use it, override the class and set the `.queryset` and
     `.serializer_class` attributes.
@@ -32,14 +27,12 @@ class LoginView(ObtainJSONWebToken):
     serializer_class = JSONWebTokenSerializer
 
 
-class RegisterView(CreateListRetrieveViewSet):
+class RegisterView(CreateViewSet):
     """
-    API endpoint that allows to register user, get individual user and get list of all users
+    API endpoint that allows to register user
+
+    Returns a JSON Web Token that can be used for authenticated requests.
     """
-    queryset = BookHubUser.objects.all()
+    queryset = User.objects.all()
     permission_classes = (AllowAny,)
-    serializer_class = BookHubUserSerializer
-    lookup_field = 'username'
-
-
-login_view = LoginView.as_view()
+    serializer_class = UserCreateSerializer

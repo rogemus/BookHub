@@ -7,8 +7,8 @@ from rest_framework_nested import routers as nested_routers
 from books import views
 from books.views import BookHubApi
 from comments.views import CommentViewSet
-from users.views import UserViewSet
 from accounts import urls as accounts_urls
+from users.views import UserViewSet
 
 
 class DocumentedRouter(routers.DefaultRouter):

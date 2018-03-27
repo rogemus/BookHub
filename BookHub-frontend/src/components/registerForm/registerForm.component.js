@@ -5,22 +5,32 @@ export default (props) => {
 	return(
 		<Form onSubmit={props.handleSubmit}>
 			<Form.Field>
+				<label>Username</label>
+				<input
+					placeholder='Username'
+					value={props.values.username}
+					onChange={props.handleChange}
+					name='username'
+					type='text'
+				/>
+			</Form.Field>
+			<Form.Field>
 				<label>Name</label>
 				<input 
-					placeholder='Name'
-					value={props.values.name}
+					placeholder='First Name'
+					value={props.values.first_name}
 					onChange={props.handleChange}
-					name='name'
+					name='first_name'
 					type='text'
 				/>
 			</Form.Field>
 			<Form.Field>
 				<label>Surname</label>
 				<input 
-					placeholder='Surname'
-					value={props.values.surname}
+					placeholder='Last Name'
+					value={props.values.last_name}
 					onChange={props.handleChange}
-					name='surname'
+					name='last_name'
 					type='text'
 				/>
 			</Form.Field>

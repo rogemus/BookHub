@@ -7,10 +7,11 @@ class RegisterPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: '',
-			surname: '',
+			first_name: '',
+			last_name: '',
 			email: '',
-			password: ''
+			password: '',
+			username: ''
 		};
 	}
 
@@ -21,8 +22,9 @@ class RegisterPage extends Component {
 				handleChange={this.onChange.bind(this)}
 				values=
 					{{
-						name: this.state.name,
-						surname: this.state.surname,
+						username: this.state.username,
+						first_name: this.state.first_name,
+						last_name: this.state.last_name,
 						email: this.state.email,
 						password: this.state.password
 					}}
@@ -33,8 +35,9 @@ class RegisterPage extends Component {
 	onSubmit($event) {
 		const userData =
 			{
-				name: this.state.name,
-				surname: this.state.surname,
+				username: this.state.username,
+				first_name: this.state.first_name,
+				last_name: this.state.last_name,
 				email: this.state.email,
 				password: this.state.password
 			};

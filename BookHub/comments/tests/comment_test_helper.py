@@ -38,5 +38,5 @@ class CommentBaseTest(APITestCase):
         }
 
     def get_token(self):
-        response = self.client.post(reverse('auth-login'), self.data, format='json')
+        response = self.client.post(reverse('login'), self.data, format='json')
         return response.data['token']

@@ -15,6 +15,7 @@ import RegisterPage from './registerPage/registerPage.container';
 import LoginPage from './loginPage/loginPage.container';
 
 import ErrorsNotification from '../components/errorNotification/errorNotification.component';
+import Header from '../components/header/header.component';
 import {clearErrors} from '../actions/errors.actions';
 
 class App extends Component {
@@ -26,18 +27,22 @@ class App extends Component {
 		return (
 			<Provider store={this.props.store}>
 				<Router>
-					<Container text>
-						<Switch>
-							<Route exact path="/" component={HomePage}/>
-							<Route path="/books/:id" component={BookPage}/>
-							<Route exact path="/register" component={RegisterPage}/>
-							<Route exact path="/login" component={LoginPage}/>
-						</Switch>
+					<div>
+						<Header/>
 
-						<ErrorsNotification
-							errors={this.props.errorContent}
-							onCloseClick={this.handleErrorClick.bind(this)}/>
-					</Container>
+						<Container text>
+							<Switch>
+								<Route exact path="/" component={HomePage}/>
+								<Route path="/books/:id" component={BookPage}/>
+								<Route exact path="/register" component={RegisterPage}/>
+								<Route exact path="/login" component={LoginPage}/>
+							</Switch>
+
+							<ErrorsNotification
+								errors={this.props.errorContent}
+								onCloseClick={this.handleErrorClick.bind(this)}/>
+						</Container>
+					</div>
 				</Router>
 			</Provider>
 		);

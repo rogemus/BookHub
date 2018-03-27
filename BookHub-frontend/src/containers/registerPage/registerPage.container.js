@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
 import {register} from '../../actions/authentication.actions';
 import RegisterForm from '../../components/registerForm/registerForm.component';
 
@@ -45,10 +44,7 @@ class RegisterPage extends Component {
 				password: this.state.password
 			};
 
-		this.props.register(userData)
-			.then(() => {
-				this.props.history.push('/');
-			});
+		this.props.register(userData);
 	}
 
 	onChange($event) {
@@ -64,4 +60,4 @@ class RegisterPage extends Component {
 	}
 }
 
-export default withRouter(connect(null, {register})(RegisterPage));
+export default connect(null, {register})(RegisterPage);

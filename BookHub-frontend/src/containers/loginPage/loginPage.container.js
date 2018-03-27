@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
-import {postUserCredential} from '../../actions/authentication.actions';
+import {login} from '../../actions/authentication.actions';
 import LoginForm from '../../components/loginForm/loginForm.component';
 
 class LoginPage extends Component {
@@ -32,10 +31,7 @@ class LoginPage extends Component {
 			password: this.state.password
 		};
 
-		this.props.postUserCredential(userData)
-			.then(() => {
-				this.props.history.push('/');
-			});
+		this.props.login(userData);
 	}
 
 	onChange($event) {
@@ -51,5 +47,5 @@ class LoginPage extends Component {
 	}
 }
 
-export default withRouter(connect(null, {postUserCredential})(LoginPage));
+export default connect(null, {login})(LoginPage);
 

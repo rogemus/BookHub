@@ -1,10 +1,10 @@
 import {
-	GET_TOKEN
+	LOGIN
 } from '../actions/types';
 
 export default (state = {}, action) => {
 	switch (action.type) {
-		case GET_TOKEN:
+		case LOGIN:
 			return {...state, token: action.payload.token};
 	}
 

@@ -1,22 +1,24 @@
 import {_post} from './axios.actions';
-import {GET_TOKEN, REGISTER} from './types';
+import {LOGIN, REGISTER} from './types';
 
-export function postUserCredential(credential) {
+export function login(credential) {
 	const config = {
-		path: 'auth/login',
+		path: 'accounts/login',
 		params: credential,
-		type: GET_TOKEN
+		type: LOGIN,
+		redirect: ''
 	};
 
-	return _post(config.path, config.params, config.type);
+	return _post(config.path, config.params, config.type, config.redirect);
 }
 
 export function register(data) {
 	const config = {
 		path: 'accounts/register',
 		params: data,
-		type: REGISTER
+		type: REGISTER,
+		redirect: '/'
 	};
 
-	return _post(config.path, config.params, config.type);
+	return _post(config.path, config.params, config.type, config.redirect);
 }

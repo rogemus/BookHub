@@ -9,7 +9,7 @@ module.exports = Object.assign(
 			contentBase: path.join(__dirname, 'public'),
 			port: 8000,
 			proxy: [{
-				context: ['/auth', '/api'],
+				context: ['/accounts', '/api'],
 				target: 'http://localhost:8080'
 			}]
 		}

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {postUserCredential} from '../../actions/authentication.actions';
+import {register} from '../../actions/authentication.actions';
 import RegisterForm from '../../components/registerForm/registerForm.component';
 
 class RegisterPage extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
 			name: '',
@@ -14,8 +14,8 @@ class RegisterPage extends Component {
 		};
 	}
 
-	renderRegisterForm(){
-		return(
+	renderRegisterForm() {
+		return (
 			<RegisterForm
 				handleSubmit={this.onSubmit.bind(this)}
 				handleChange={this.onChange.bind(this)}
@@ -30,18 +30,18 @@ class RegisterPage extends Component {
 		);
 	}
 
-	onSubmit($event){
+	onSubmit($event) {
 		const userData =
-				{
-					name: this.state.name,
-					surname: this.state.surname,
-					email: this.state.email,
-					password: this.state.password
-				}; 
+			{
+				name: this.state.name,
+				surname: this.state.surname,
+				email: this.state.email,
+				password: this.state.password
+			};
+
+		this.props.register(userData);
 
 		$event.preventDefault();
-		/* TODO BOOK-33 */
-		this.props.postUserCredential(userData);
 	}
 
 	onChange($event) {
@@ -56,13 +56,5 @@ class RegisterPage extends Component {
 		);
 	}
 }
-// Tyż nie czaje tego
-function mapStateToProps(state) {
-	/* TODO BOOK-33 */
-	return {
-		user: state.book.bookData
-	};
-}
-// Nie wiem co z tym connectem, bo raczej tak nie powinno byc
-// halp
-export default connect(mapStateToProps, {postUserCredential})(RegisterPage);
+
+export default connect(null, {register})(RegisterPage);

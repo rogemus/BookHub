@@ -25,17 +25,16 @@ class LoginPage extends Component {
 	}
 
 	onSubmit($event) {
+		$event.preventDefault();
+
 		const userData = {
 			username: this.state.username,
 			password: this.state.password
 		};
 
-		$event.preventDefault();
 		this.props.postUserCredential(userData)
 			.then(() => {
-				const {history} = this.props;
-
-				history.push('/');
+				this.props.history.push('/');
 			});
 	}
 

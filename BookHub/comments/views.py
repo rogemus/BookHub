@@ -1,10 +1,13 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from books.models import Book
 from comments.models import Comment
+from comments.permissions import IsCommentAuthorOrReadOnly
 from comments.serializers import CommentSerializer
 
 
@@ -17,9 +20,15 @@ class CommentViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows comments to be viewed or edited.
     """
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    authentication_classes = (JSONWebTokenAuthentication,)
+    permission_classes = (IsAuthenticatedOrReadOnly, IsCommentAuthorOrReadOnly,)
     serializer_class = CommentSerializer
     pagination_class = CommentResultsSetPagination
+
+    def destroy(self, request, *args, **kwargs):
+        comment = self.get_object()
+        comment.mark_as_removed()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def get_queryset(self):
         return Comment.objects.filter(

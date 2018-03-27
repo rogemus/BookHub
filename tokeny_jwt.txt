@@ -1,0 +1,21 @@
+Pobieranie tokenu
+
+curl -X POST \
+  http://localhost:8080/auth/obtain_token/ \
+  -H 'accept: application/json' \
+  -H 'content-type: application/json' \
+  -d '{
+    "username": "admin",
+    "password": "test1234"
+}'
+
+Sprawdzanie czy token jest ważny
+
+curl -X POST \
+  http://localhost:8080/auth/verify_token/ \
+  -H 'content-type: application/json' \
+  -d '{"token":"<TOKEN>"}'
+
+Odświerzenie tokenu
+
+curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8080/auth/refresh_token/

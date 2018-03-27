@@ -4,18 +4,20 @@ import {Link} from 'react-router-dom';
 import './header.styles.css';
 
 const renderUserDetails = (user) => {
-	return <p>user</p>;
+	return (
+		<ul className='align-right'>
+			<li><Link to={'/me'}>{user.username}</Link></li>
+		</ul>
+	);
 };
 
 const renderNav = () => {
 	return (
-		<nav>
-			<ul>
-				<li><Link to={'/'}>Home</Link></li>
-				<li><Link to={'login'}>Login</Link></li>
-				<li><Link to={'register'}>Register</Link></li>
-			</ul>
-		</nav>
+		<ul>
+			<li><Link to={'/'}>Home</Link></li>
+			<li><Link to={'login'}>Login</Link></li>
+			<li><Link to={'register'}>Register</Link></li>
+		</ul>
 	);
 };
 
@@ -24,7 +26,11 @@ export default ({user}) => {
 		return (
 			<header className='header-main'>
 				<Container text>
-					{renderUserDetails(user)}
+					<nav>
+						<ul>
+							{renderUserDetails(user)}
+						</ul>
+					</nav>
 				</Container>
 			</header>
 		);
@@ -33,7 +39,9 @@ export default ({user}) => {
 	return (
 		<header className='header-main'>
 			<Container text>
-				{renderNav()}
+				<nav>
+					{renderNav()}
+				</nav>
 			</Container>
 		</header>
 	);

@@ -13,6 +13,10 @@
     margin: 0;
 }
 
+.header-main nav ul.align-right {
+    text-align: right;
+}
+
 .header-main nav ul li {
     display: inline-block;
     margin-right: 5px;

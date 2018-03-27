@@ -28,7 +28,7 @@ class App extends Component {
 			<Provider store={this.props.store}>
 				<Router>
 					<div>
-						<Header/>
+						<Header user={this.props.currentUser}/>
 
 						<Container text>
 							<Switch>
@@ -51,7 +51,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
 	return {
-		errorContent: state.errors.errorContent
+		errorContent: state.errors.errorContent,
+		currentUser: state.user.current
 	};
 }
 

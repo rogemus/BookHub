@@ -12,10 +12,12 @@ const bookTitle = (id, title) => {
 
 export default ({book}) => {
 	return (
-		<Card
-			image={book.image_url}
-			header={bookTitle(book.id, book.title)}
-			meta={book.publisher.name}
-		/>
+		<div className='listing-item'>
+			<Card
+				image={book.image_url}
+				header={bookTitle(book.id, book.title)}
+				meta={book.publisher.name}
+			/>
+		</div>
 	);
 };

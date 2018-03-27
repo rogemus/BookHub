@@ -1,32 +1,12 @@
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, mixins
-from rest_framework.permissions import AllowAny
+from django.contrib.auth import get_user_model
+from rest_framework import viewsets
 
-from users.models import User
 from users.serializers import UserSerializer
 
-
-class CreateListRetrieveViewSet(mixins.CreateModelMixin,
-                                mixins.ListModelMixin,
-                                mixins.RetrieveModelMixin,
-                                mixins.DestroyModelMixin,
-                                viewsets.GenericViewSet):
-    """
-    A viewset that provides `retrieve`, `create`, `delete` and `list` actions.
-
-    To use it, override the class and set the `.queryset` and
-    `.serializer_class` attributes.
-    """
-    pass
+User = get_user_model()
 
 
-class UserViewSet(CreateListRetrieveViewSet):
-    """
-    API endpoint that allows to register user, get individual user and get list of all users
-    """
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
     serializer_class = UserSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('email', 'username',)
     lookup_field = 'username'

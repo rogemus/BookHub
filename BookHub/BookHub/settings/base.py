@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 
 APPEND_SLASH = True
 
+
+AUTH_USER_MODEL = 'accounts.BookHubUser'
+
 # Application definition
 
 BASE_APPS = [
@@ -42,7 +45,7 @@ BASE_APPS = [
 ]
 
 PROJECT_APPS = [
-    'book_hub_auth.apps.BookHubAuthConfig',
+    'accounts.apps.AccountsConfig',
     'books.apps.BooksConfig',
     'comments.apps.CommentsConfig',
     'users.apps.UsersConfig',
@@ -144,6 +147,7 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=24),
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'accounts.utils.jwt_response_payload_handler',
 }
 
 COMMENT_SNIPPET_LENGTH = 30

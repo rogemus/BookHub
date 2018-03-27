@@ -41,3 +41,19 @@ class UserCreateSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+
+class AboutUserSerializer(serializers.ModelSerializer):
+    active = serializers.BooleanField(source='is_active')
+    joined = serializers.DateTimeField(source='date_joined', format='%Y-%m-%d')
+
+    class Meta:
+        model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'joined',
+            'active',
+        )

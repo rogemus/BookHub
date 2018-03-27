@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import {postUserCredential} from '../../actions/authentication.actions';
 import LoginForm from '../../components/loginForm/loginForm.component';
 
@@ -8,7 +9,7 @@ class LoginPage extends Component {
 		super(props);
 
 		this.state = {
-			email: '',
+			username: '',
 			password: ''
 		};
 	}
@@ -18,20 +19,24 @@ class LoginPage extends Component {
 			<LoginForm
 				handleSubmit={this.onSubmit.bind(this)}
 				handleChange={this.onChange.bind(this)}
-				values={{email: this.state.email, password: this.state.password}}
+				values={{username: this.state.username, password: this.state.password}}
 			/>
 		);
 	}
 
 	onSubmit($event) {
 		const userData = {
-			email: this.state.email,
+			username: this.state.username,
 			password: this.state.password
 		};
 
 		$event.preventDefault();
-		/* TODO BOOK-33 */
-		this.props.postUserCredential(userData);
+		this.props.postUserCredential(userData)
+			.then(() => {
+				const {history} = this.props;
+
+				history.push('/');
+			});
 	}
 
 	onChange($event) {
@@ -47,12 +52,5 @@ class LoginPage extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	/* TODO BOOK-33 */
-	return {
-		user: state.book.bookData
-	};
-}
-
-export default connect(mapStateToProps, {postUserCredential})(LoginPage);
+export default withRouter(connect(null, {postUserCredential})(LoginPage));
 

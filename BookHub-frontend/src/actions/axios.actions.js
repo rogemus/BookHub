@@ -6,7 +6,6 @@ import {
 const API_URL = '/api';
 
 const instance = axios.create({
-	baseURL: API_URL,
 	headers: {
 		accept: 'application/json'
 	}
@@ -14,7 +13,7 @@ const instance = axios.create({
 
 export function _get(path, config, actionType) {
 	return (dispatch) => {
-		instance.get(`/${path}/`, config)
+		return instance.get(`${API_URL}/${path}/`, config)
 			.then((response) => {
 				dispatch({
 					payload: response.data,
@@ -32,7 +31,7 @@ export function _get(path, config, actionType) {
 
 export function _post(path, config, actionType) {
 	return (dispatch) => {
-		instance.post(`/${path}/`, config)
+		return instance.post(`/${path}/`, config)
 			.then((response) => {
 				dispatch({
 					payload: response.data,

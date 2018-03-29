@@ -29,7 +29,7 @@ export function _get(path, config, actionType) {
 	};
 }
 
-export function _post(path, config, actionType) {
+export function _post(path, config, actionType, redirectPath) {
 	return (dispatch) => {
 		return instance.post(`/${path}/`, config)
 			.then((response) => {
@@ -37,10 +37,14 @@ export function _post(path, config, actionType) {
 					payload: response.data,
 					type: actionType
 				});
+
+				if (typeof redirectPath !== 'undefined') {
+					window.location.hash = redirectPath;
+				}
 			})
 			.catch((error) => {
 				dispatch({
-					payload: error,
+					payload: error.response.data,
 					type: ERRORS
 				});
 			});

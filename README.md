@@ -12,7 +12,8 @@ Projekt grupowy na Systemy Informatyczne
 5. Export settings ```export DJANGO_SETTINGS_MODULE='BookHub.settings.local'```
 6. Make DB migrations ```python manage.py migrate```
 7. Create Admin user ```python manage.py createsuperuser --email admin@example.com --username admin```
-8. Start server ```python manage.py runserver 127.0.0.1:8080```
+8. Load demo content ```./manage.py loaddata db.json```
+9. Start server ```python manage.py runserver 127.0.0.1:8080```
 
 Resource | URL
 --- | ---

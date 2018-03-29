@@ -4,7 +4,7 @@ import {Form,Button} from 'semantic-ui-react';
 export default (props) => {
 	return(
 		<Form onSubmit={props.handleSubmit}>
-			<Form.Field>
+			<Form.Field required>
 				<label>Username</label>
 				<input
 					placeholder='Username'
@@ -14,7 +14,7 @@ export default (props) => {
 					type='text'
 				/>
 			</Form.Field>
-			<Form.Field>
+			<Form.Field required>
 				<label>Name</label>
 				<input 
 					placeholder='First Name'
@@ -24,7 +24,7 @@ export default (props) => {
 					type='text'
 				/>
 			</Form.Field>
-			<Form.Field>
+			<Form.Field required>
 				<label>Surname</label>
 				<input 
 					placeholder='Last Name'

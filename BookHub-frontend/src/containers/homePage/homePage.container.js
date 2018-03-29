@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import BooksListing from '../booksListing/booksListing.container';
+import RegisterPage from '../registerPage/registerPage.container';
 
 class HomePage extends Component {
 	render() {

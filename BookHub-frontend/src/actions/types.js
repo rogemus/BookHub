@@ -6,3 +6,4 @@ export const ERRORS = 'errors';
 
 /* AUTHENTICATION */
 export const GET_TOKEN = 'get_token';
+export const REGISTER = 'register';

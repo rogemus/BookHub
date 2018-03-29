@@ -24,7 +24,8 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.3.0",
-    "semantic-ui-react": "^0.78.3"
+    "semantic-ui-react": "^0.78.3",
+    "yarn": "^1.5.1"
   },
   "devDependencies": {
     "autoprefixer": "^8.1.0",

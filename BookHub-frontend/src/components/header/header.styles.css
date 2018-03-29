@@ -1,0 +1,33 @@
+.header-main {
+    background: rgb(27, 28, 29);
+    margin-bottom: 35px;
+}
+
+.header-main nav {
+    color: rgba(255, 255, 255, .9);
+}
+
+.header-main nav ul {
+    list-style: none;
+    padding: 15px 0;
+    margin: 0;
+}
+
+.header-main nav ul.align-right {
+    text-align: right;
+}
+
+.header-main nav ul li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.header-main nav ul li:first-of-type a {
+    padding-left: 0;
+}
+
+.header-main nav ul li a {
+    color: rgba(255, 255, 255, .9);
+    display: block;
+    padding: 5px 10px;
+}

@@ -1,4 +1,4 @@
-import {_post} from './axios.actions';
+import {_post, _postLogin} from './axios.actions';
 import {LOGIN, REGISTER} from './types';
 
 export function login(credential) {
@@ -9,7 +9,7 @@ export function login(credential) {
 		redirect: ''
 	};
 
-	return _post(config.path, config.params, config.type, config.redirect);
+	return _postLogin(config.path, config.params, config.type, config.redirect);
 }
 
 export function register(data) {

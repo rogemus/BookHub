@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from accounts.validators import username_validator
+from books.models import Book
 
 
 class BookHubUser(AbstractUser):
@@ -19,6 +20,7 @@ class BookHubUser(AbstractUser):
         },
     )
     email = models.EmailField(unique=True, blank=False)
+    favourites = models.ManyToManyField(Book, through='favourites.Favourite')
 
     class Meta:
         db_table = 'book_hub_user'

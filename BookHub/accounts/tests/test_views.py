@@ -52,7 +52,7 @@ class LoginViewTest(AuthBaseTest):
         self.data['password'] = 'some bad password'
         response = self.client.post(reverse('login'), self.data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data['non_field_errors'][0], 'Unable to log in with provided credentials.')
+        self.assertEqual(response.data['message'][0], 'Unable to log in with provided credentials.')
 
 
 class RegisterViewTest(AuthBaseTest):

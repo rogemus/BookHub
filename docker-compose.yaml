@@ -1,30 +1,38 @@
 version: '3'
 
-
 services:
+
+  # BookHub Nginx as ReverseProxy
   reverseproxy:
     image: nginx
     restart: always
     volumes:
+      - ./docker/docker_provision/certs:/etc/ssl/
       - ./docker/docker_provision/nginx.conf:/etc/nginx/nginx.conf
-      - ./docker/docker_provision/bookhub.com.template:/etc/nginx/conf.d/bookhub.com.template
+      - ./docker/docker_provision/api.bookhub.com.template:/etc/nginx/conf.d/api.bookhub.com.template
+      - ./docker/docker_provision/snippets:/etc/nginx/snippets
       - app-statics:/static
+      - frontend:/var/www/bookhub.com
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
     environment:
-      - NGINX_HOST=bookhub.com
+      - NGINX_HOST=api.bookhub.com
       - NGINX_PORT=80
+      - NGINX_SSL_PORT=443
       - BACKEND_UPSTREAM=bookhub-backend
-    command: /bin/bash -c "envsubst '$${NGINX_PORT},$${NGINX_HOST},$${BACKEND_UPSTREAM}' < /etc/nginx/conf.d/bookhub.com.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    command: /bin/bash -c "envsubst '$${NGINX_PORT},$${NGINX_SSL_PORT},$${NGINX_HOST},$${BACKEND_UPSTREAM}' < /etc/nginx/conf.d/api.bookhub.com.template > /etc/nginx/conf.d/api.bookhub.com.conf && nginx -g 'daemon off;'"
     depends_on:
         - bookhub-backend
+        - bookhub-frontend
 
+  # BookHub API instance
   bookhub-backend:
     image: bookhub-backend:prod
     build:
       context: ./BookHub
       dockerfile: $PWD/docker/bookhub-backend/Dockerfile
-    command: gunicorn --workers 2 --bind 0.0.0.0:8000 BookHub.wsgi:application --access-logfile - --error-logfile -
+    command: gunicorn --workers 2 --bind 0.0.0.0:8000 BookHub.wsgi:application --error-logfile -
     volumes:
         - ./BookHub:/srv/app
         - app-statics:/static
@@ -33,6 +41,19 @@ services:
     expose:
       - "8000"
 
+  bookhub-frontend:
+    image: bookhub-frontend:prod
+    build:
+      context: ./BookHub-frontend
+      dockerfile: $PWD/docker/bookhub-frontend/Dockerfile
+    volumes:
+      - ./BookHub-frontend:/app
+      - frontend:/var/www/bookhub.com
+
+
 volumes:
   app-statics:
+  frontend:
+
+
 

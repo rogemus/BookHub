@@ -11,7 +11,6 @@ ADD . /app
 RUN python manage.py migrate
 RUN python manage.py collectstatic --noinput
 
-
 RUN ln -sf /dev/stdout /var/log/bookhub/access.log \
 	&& ln -sf /dev/stderr /var/log/bookhub/error.log
 

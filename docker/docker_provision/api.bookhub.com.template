@@ -1,0 +1,52 @@
+upstream app_server {
+
+    server ${BACKEND_UPSTREAM}:8000 fail_timeout=0;
+
+}
+
+server {
+    listen ${NGINX_PORT} default_server;
+    listen [::]:${NGINX_PORT} default_server;
+    server_name ${NGINX_HOST} www.${NGINX_HOST};
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+	listen ${NGINX_SSL_PORT} ssl http2 default_server;
+    listen [::]:${NGINX_SSL_PORT} ssl http2 default_server;
+    include snippets/self-signed.conf;
+    include snippets/ssl-params.conf;
+
+    add_header X-Proxy-Cache $upstream_cache_status;
+
+    location / {
+
+        include snippets/proxy_params.conf;
+
+        proxy_redirect off;
+        proxy_pass http://app_server;
+    }
+
+    location /static {
+        alias /static;
+    }
+
+
+}
+
+server {
+	listen ${NGINX_PORT};
+    listen [::]:${NGINX_PORT};
+    server_name bookhub.com;
+
+    root /var/www/bookhub.com;
+    index index.html index.htm;
+
+    add_header X-Proxy-Cache $upstream_cache_status;
+
+    location / {
+
+        try_files $uri /index.html;
+
+    }
+}

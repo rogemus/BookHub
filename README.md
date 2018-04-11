@@ -3,6 +3,7 @@ Projekt grupowy na Systemy Informatyczne
 
 ## Build Status
 [![Build Status](https://travis-ci.org/rogemus/BookHub.svg?branch=master)](https://travis-ci.org/rogemus/BookHub)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6b5bb5d7d87942baab6b4231d272e296)](https://www.codacy.com/app/rogemus/BookHub?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rogemus/BookHub&amp;utm_campaign=Badge_Grade)
 
 ## Developing
 1. Create VirtualEnv ```python3.6 -m venv venv```

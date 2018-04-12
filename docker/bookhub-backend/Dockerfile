@@ -4,9 +4,9 @@ ENV DJANGO_SETTINGS_MODULE=BookHub.settings.prod
 
 RUN mkdir /app /var/log/bookhub
 WORKDIR /app
-ADD ./requirements/prod.txt /app/requirements.txt
+COPY ./requirements/prod.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-ADD . /app
+COPY . /app
 
 RUN python manage.py migrate
 RUN python manage.py collectstatic --noinput

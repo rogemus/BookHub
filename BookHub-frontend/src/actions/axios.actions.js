@@ -4,7 +4,17 @@ import {
 	SET_CURRENT_USER
 } from './types';
 
-const API_URL = '/api';
+/* eslint-disable */
+
+// #if process.env.NODE_ENV === 'production'
+import API_URL from '../configs/api.prod.config';
+// #endif
+
+// #if process.env.NODE_ENV !== 'production'
+import API_URL from '../configs/api.local.config';
+// #endif
+
+/* eslint-enable */
 
 const instance = axios.create({
 	headers: {

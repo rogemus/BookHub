@@ -1,1 +1,1 @@
-export default 'api.bookhub.com/api';
+export default '/api';

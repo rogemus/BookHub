@@ -14,13 +14,21 @@ server {
 server {
 	listen ${NGINX_SSL_PORT} ssl http2 default_server;
     listen [::]:${NGINX_SSL_PORT} ssl http2 default_server;
+    server_name ${NGINX_HOST} www.${NGINX_HOST};
     include snippets/self-signed.conf;
     include snippets/ssl-params.conf;
 
-    add_header X-Proxy-Cache $upstream_cache_status;
-
     location / {
+        index index.html index.htm;
 
+        root /var/www/bookhub.com;
+
+        add_header X-Proxy-Cache $upstream_cache_status;
+
+        try_files $uri $uri/index.html $uri.html =404;
+    }
+
+    location /api {
         include snippets/proxy_params.conf;
 
         proxy_redirect off;
@@ -29,24 +37,5 @@ server {
 
     location /static {
         alias /static;
-    }
-
-
-}
-
-server {
-	listen ${NGINX_PORT};
-    listen [::]:${NGINX_PORT};
-    server_name bookhub.com;
-
-    root /var/www/bookhub.com;
-    index index.html index.htm;
-
-    add_header X-Proxy-Cache $upstream_cache_status;
-
-    location / {
-
-        try_files $uri /index.html;
-
     }
 }

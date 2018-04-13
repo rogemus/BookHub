@@ -1,34 +1,26 @@
 version: '3'
 
 services:
-
-  # BookHub Nginx as ReverseProxy
-  reverseproxy:
-    image: nginx
+  bookhub-reverseproxy:
+    image: bookhub-reverseproxy:prod
     restart: always
+    container_name: bookhub-reverseproxy
+    build:
+      context: ./docker/bookhub-nginx
+      dockerfile: ./Dockerfile
     volumes:
-      - ./docker/docker_provision/certs:/etc/ssl/
-      - ./docker/docker_provision/nginx.conf:/etc/nginx/nginx.conf
-      - ./docker/docker_provision/bookhub.com.template:/etc/nginx/conf.d/bookhub.com.template
-      - ./docker/docker_provision/snippets:/etc/nginx/snippets
       - app-statics:/static
       - frontend:/var/www/bookhub.com
     ports:
       - "80:80"
       - "443:443"
-    environment:
-      - NGINX_HOST=bookhub.com
-      - NGINX_PORT=80
-      - NGINX_SSL_PORT=443
-      - BACKEND_UPSTREAM=bookhub-backend
-    command: /bin/bash -c "envsubst '$${NGINX_PORT},$${NGINX_SSL_PORT},$${NGINX_HOST},$${BACKEND_UPSTREAM}' < /etc/nginx/conf.d/bookhub.com.template > /etc/nginx/conf.d/bookhub.com.conf && nginx -g 'daemon off;'"
+    command: [nginx, "-g", "daemon off;"]
     depends_on:
         - bookhub-backend
         - bookhub-frontend
-
-  # BookHub API instance
   bookhub-backend:
     image: bookhub-backend:prod
+    container_name: bookhub-backend
     build:
       context: ./BookHub
       dockerfile: $PWD/docker/bookhub-backend/Dockerfile
@@ -40,15 +32,14 @@ services:
       - DJANGO_SETTINGS_MODULE=BookHub.settings.prod
     expose:
       - "8000"
-
   bookhub-frontend:
     image: bookhub-frontend:prod
+    container_name: bookhub-frontend
     build:
       context: ./BookHub-frontend
       dockerfile: $PWD/docker/bookhub-frontend/Dockerfile
     volumes:
       - frontend:/var/www/bookhub.com
-
 
 volumes:
   app-statics:

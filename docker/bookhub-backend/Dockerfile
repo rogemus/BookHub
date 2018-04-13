@@ -1,4 +1,6 @@
 FROM python:3.6-slim
+LABEL version="1.0"
+LABEL maintainer="bookhub@corporation.com"
 
 ENV DJANGO_SETTINGS_MODULE=BookHub.settings.prod
 

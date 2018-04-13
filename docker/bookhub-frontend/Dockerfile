@@ -1,4 +1,7 @@
 FROM node:8.11-slim
+LABEL version="1.0"
+LABEL maintainer="bookhub@corporation.com"
+
 
 RUN mkdir /app
 WORKDIR /app

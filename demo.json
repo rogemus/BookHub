@@ -1,0 +1,185 @@
+[
+{
+    "model": "accounts.bookhubuser",
+    "pk": "1c1a5bdb-9660-4410-8ee6-f3fad61f4125",
+    "fields": {
+        "password": "pbkdf2_sha256$100000$ccM5Pw9nMjr8$u+CbUJ3Q/Voz5gRTMQngC696IlGXkem0xqizi/dXQBc=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2018-03-30T10:26:21.143Z",
+        "username": "book_hub_user_3",
+        "email": "book_hub_user_3@example.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.bookhubuser",
+    "pk": "3d172691-5043-4920-8d5d-1805356e2f2f",
+    "fields": {
+        "password": "pbkdf2_sha256$100000$f7kjnDFnjjRv$qBRiOKo1pWTmyUrCa+CIOZDLJx21beoHjSsuRjYFkcc=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2018-03-30T10:25:59.978Z",
+        "username": "book_hub_user_2",
+        "email": "book_hub_user_2@example.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.bookhubuser",
+    "pk": "51a78505-e329-4736-8315-12f624a0659e",
+    "fields": {
+        "password": "pbkdf2_sha256$100000$oLtVCGYQiXlC$Hvd6KLZjX0LA1XYXMtoE2bkPyNwLIom94Q08JiZTxxE=",
+        "last_login": "2018-03-31T06:21:28.587Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2018-03-30T10:18:34.654Z",
+        "username": "admin",
+        "email": "admin@example.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.bookhubuser",
+    "pk": "b2a1133c-329e-41f5-82ce-1580c5a4615b",
+    "fields": {
+        "password": "pbkdf2_sha256$100000$6vkn4oVLl2Ea$pxgAiiSWPZNT0y5OLUoQEfunI6tXJIOGnl3N0m5psKM=",
+        "last_login": "2018-03-30T10:19:32.843Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2018-03-30T10:19:10.653Z",
+        "username": "book_hub_user",
+        "email": "book_hub_user@example.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "books.publisher",
+    "pk": 4,
+    "fields": {
+        "name": "O'Reilly Media",
+        "website": "http://oreilly.com"
+    }
+},
+{
+    "model": "books.publisher",
+    "pk": 5,
+    "fields": {
+        "name": "Amazon Digital Services LLC",
+        "website": "http://amazon.com"
+    }
+},
+{
+    "model": "books.author",
+    "pk": 3,
+    "fields": {
+        "first_name": "Mark",
+        "last_name": "Lutz"
+    }
+},
+{
+    "model": "books.author",
+    "pk": 4,
+    "fields": {
+        "first_name": "Leonard",
+        "last_name": "Eddison"
+    }
+},
+{
+    "model": "books.book",
+    "pk": "0862a3ef-020e-408b-82e3-93b875a7b545",
+    "fields": {
+        "title": "Python Programming: A Step By Step Guide For Beginners",
+        "publisher": 5,
+        "description": "Python is a fun language to learn, and it is now one of the most popular programming languages, suitable for almost any task from developing graphical user interfaces to building web applications.\r\n\r\nP\u0443th\u043en is a powerful high-l\u0435v\u0435l, object-oriented \u0440r\u043egr\u0430mming l\u0430ngu\u0430g\u0435. \r\nIt h\u0430\u0455 \u0455im\u0440l\u0435 \u0435\u0430\u0455\u0443-t\u043e-u\u0455\u0435 \u0455\u0443nt\u0430x, making it th\u0435 perfect l\u0430ngu\u0430g\u0435 f\u043er \u0455\u043em\u0435\u043en\u0435 tr\u0443ing t\u043e l\u0435\u0430rn \u0441\u043em\u0440ut\u0435r \u0440r\u043egr\u0430mming for th\u0435 fir\u0455t tim\u0435.\r\n\r\nIf \u0443\u043eu \u0430r\u0435 getting \u0455t\u0430rt\u0435d in programming, Python i\u0455 \u0430n awesome choice. You will be amazed how mu\u0441h you can d\u043e in Python \u043en\u0441\u0435 \u0443\u043eu kn\u043ew the basics.",
+        "publication_date": "2018-03-02",
+        "image_url": "https://images-na.ssl-images-amazon.com/images/I/510zJulWD9L._SX260_.jpg",
+        "cover": "paperback",
+        "language": "EN",
+        "isbn": "1986278573",
+        "authors": [
+            4
+        ]
+    }
+},
+{
+    "model": "books.book",
+    "pk": "db8f85d4-47dd-488d-a1a6-105d98eccc87",
+    "fields": {
+        "title": "Learning Python, 5th Edition 5th Edition",
+        "publisher": 4,
+        "description": "Get a comprehensive, in-depth introduction to the core Python language with this hands-on book. Based on author Mark Lutz\u2019s popular training course, this updated fifth edition will help you quickly write efficient, high-quality code with Python. It\u2019s an ideal way to begin, whether you\u2019re new to programming or a professional developer versed in other languages.",
+        "publication_date": "2015-08-12",
+        "image_url": "https://images-na.ssl-images-amazon.com/images/I/515iBchIIzL._SX379_BO1,204,203,200_.jpg",
+        "cover": "paperback",
+        "language": "EN",
+        "isbn": "9781449355739",
+        "authors": [
+            3
+        ]
+    }
+},
+{
+    "model": "comments.comment",
+    "pk": 4,
+    "fields": {
+        "book": "db8f85d4-47dd-488d-a1a6-105d98eccc87",
+        "author": [
+            "book_hub_user_2"
+        ],
+        "text": "This book is totally for beginners. So, if you are already know something about Python and have some programming experience and skills, you probably won't find here something useful for you.",
+        "submit_date": "2018-03-30T10:27:10.457Z",
+        "updated_at": "2018-03-21T10:27:04Z",
+        "is_public": true,
+        "is_removed": false
+    }
+},
+{
+    "model": "comments.comment",
+    "pk": 5,
+    "fields": {
+        "book": "db8f85d4-47dd-488d-a1a6-105d98eccc87",
+        "author": [
+            "book_hub_user_3"
+        ],
+        "text": "It's very hard to appreciate such extraordinary creations, so I do not know whether to write five or one stars! Everything is written in the easiest way possible that normal readers can understand.",
+        "submit_date": "2018-03-30T10:27:40.779Z",
+        "updated_at": "2018-03-19T08:27:36Z",
+        "is_public": true,
+        "is_removed": false
+    }
+},
+{
+    "model": "comments.comment",
+    "pk": 6,
+    "fields": {
+        "book": "0862a3ef-020e-408b-82e3-93b875a7b545",
+        "author": [
+            "book_hub_user"
+        ],
+        "text": "his Python Programming Guide is extremely a point that each individual by all account not the only software engineer should know.",
+        "submit_date": "2018-03-30T10:28:37.702Z",
+        "updated_at": "2017-09-07T18:00:00Z",
+        "is_public": true,
+        "is_removed": false
+    }
+}
+]

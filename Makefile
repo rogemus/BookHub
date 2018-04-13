@@ -1,5 +1,6 @@
 DOCKER_COMPOSE_RUN = docker-compose run --rm
-MANAGE_PY = ${DOCKER_COMPOSE_RUN} bookhub-backend python manage.py
+DOCKER_COMPOSE_EXEC = docker-compose exec
+MANAGE_PY = ${DOCKER_COMPOSE_EXEC} bookhub-backend python manage.py
 
 run:
 	${DOCKER_COMPOSE_RUN} --service-ports reverseproxy
@@ -14,7 +15,8 @@ clean_db:
 	${MANAGE_PY} flush --no-input
 
 load_fxtures:
-	${MANAGE_PY} loaddata demo.yaml
+	docker cp demo.json bookhub-backend:/app/demo.json
+	${MANAGE_PY} loaddata demo.json
 
 create_fixtures:
 	${MANAGE_PY} dumpdata \
@@ -23,5 +25,4 @@ create_fixtures:
 		--exclude admin.logentry \
 		--exclude sessions.session \
 		--exclude contenttypes \
-		--indent 2 \
-		--output demo.yaml
+		--indent 4 > demo.json

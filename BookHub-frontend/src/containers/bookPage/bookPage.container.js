@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {getBook} from '../../actions/book.actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
+import { getBook } from '../../actions/book.actions';
 import BookDetails from '../../components/bookDetails/bookDetails.componnet';
 
 class BookPage extends Component {
@@ -11,7 +12,7 @@ class BookPage extends Component {
 
 	renderBookDetails() {
 		if (!isEmpty(this.props.book)) {
-			return <BookDetails book={this.props.book}/>;
+			return <BookDetails book={this.props.book} />;
 		}
 	}
 
@@ -29,6 +30,12 @@ function mapStateToProps(state) {
 		book: state.book.bookData
 	};
 }
+
+BookPage.propTypes = {
+	getBook: PropTypes.func,
+	book: PropTypes.object,
+	match: PropTypes.object
+};
 
 export default connect(mapStateToProps, {getBook})(BookPage);
 

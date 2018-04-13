@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {register} from '../../actions/authentication.actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { register } from '../../actions/authentication.actions';
 import RegisterForm from '../../components/registerForm/registerForm.component';
 
 class RegisterPage extends Component {
@@ -35,14 +36,13 @@ class RegisterPage extends Component {
 	onSubmit($event) {
 		$event.preventDefault();
 
-		const userData =
-			{
-				username: this.state.username,
-				first_name: this.state.first_name,
-				last_name: this.state.last_name,
-				email: this.state.email,
-				password: this.state.password
-			};
+		const userData = {
+			username: this.state.username,
+			first_name: this.state.first_name,
+			last_name: this.state.last_name,
+			email: this.state.email,
+			password: this.state.password
+		};
 
 		this.props.register(userData);
 	}
@@ -59,5 +59,9 @@ class RegisterPage extends Component {
 		);
 	}
 }
+
+RegisterPage.propTypes = {
+	register: PropTypes.func.isRequired
+};
 
 export default connect(null, {register})(RegisterPage);

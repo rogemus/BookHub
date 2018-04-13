@@ -4,17 +4,7 @@ import {
 	SET_CURRENT_USER
 } from './types';
 
-/* eslint-disable */
-
-// #if process.env.NODE_ENV === 'production'
-import API_URL from '../configs/api.prod.config';
-// #endif
-
-// #if process.env.NODE_ENV !== 'production'
-import API_URL from '../configs/api.local.config';
-// #endif
-
-/* eslint-enable */
+const API_URL = '/api';
 
 const instance = axios.create({
 	headers: {
@@ -40,9 +30,15 @@ export function _get(path, config, actionType) {
 	};
 }
 
-export function _post(path, config, actionType, redirectPath) {
+export function _post(path, config, actionType, redirectPath, noApiUrl) {
+	let url = `${API_URL}/${path}/`;
+
+	if (noApiUrl) {
+		url = `/${path}/`;
+	}
+
 	return (dispatch) => {
-		return instance.post(`/${path}/`, config)
+		return instance.post(url, config)
 			.then((response) => {
 				dispatch({
 					payload: response.data,

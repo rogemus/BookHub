@@ -30,8 +30,7 @@ module.exports = () => {
 					exclude: /node_modules/,
 					use: [
 						'babel-loader',
-						'eslint-loader',
-						'webpack-conditional-loader'
+						'eslint-loader'
 					]
 				},
 				{

@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {connect, Provider} from 'react-redux';
 import {Container} from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import {
 	HashRouter as Router,
 	Route,
 	Switch
 } from 'react-router-dom';
-import '../styles/main.css';
-import 'semantic-ui-css/semantic.min.css';
 
 import HomePage from './homePage/homePage.container';
 import BookPage from './bookPage/bookPage.container';
@@ -17,6 +16,9 @@ import LoginPage from './loginPage/loginPage.container';
 import ErrorsNotification from '../components/errorNotification/errorNotification.component';
 import Header from '../components/header/header.component';
 import {clearErrors} from '../actions/errors.actions';
+
+import 'semantic-ui-css/semantic.min.css';
+import '../styles/main.css';
 
 class App extends Component {
 	handleErrorClick() {
@@ -55,6 +57,13 @@ function mapStateToProps(state) {
 		currentUser: state.user.current
 	};
 }
+
+App.propTypes = {
+	errorContent: PropTypes.object,
+	currentUser: PropTypes.object,
+	store: PropTypes.object.isRequired,
+	clearErrors: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, {clearErrors})(App);
 

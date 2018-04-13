@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
 	Form,
 	Button
 } from 'semantic-ui-react';
 
-export default (props) => {
+export default function LoginForm(props) {
 	return (
 		<Form onSubmit={props.handleSubmit}>
 			<Form.Field required>
@@ -32,4 +33,10 @@ export default (props) => {
 			<Button type='submit' primary>Submit</Button>
 		</Form>
 	);
+}
+
+LoginForm.propTypes = {
+	handleSubmit: PropTypes.func.isRequired,
+	handleChange: PropTypes.func.isRequired,
+	values: PropTypes.object.isRequired
 };

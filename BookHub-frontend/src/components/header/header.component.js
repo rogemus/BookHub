@@ -1,35 +1,17 @@
 import React from 'react';
-import {Container} from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Container } from 'semantic-ui-react';
+import UserNav from '../userNav/userNav.component';
+import Nav from '../nav/nav.component';
 import './header.styles.css';
 
-const renderUserDetails = (user) => {
-	return (
-		<ul className='align-right'>
-			<li><Link to={'/me'}>{user.username}</Link></li>
-		</ul>
-	);
-};
-
-const renderNav = () => {
-	return (
-		<ul>
-			<li><Link to={'/'}>Home</Link></li>
-			<li><Link to={'login'}>Login</Link></li>
-			<li><Link to={'register'}>Register</Link></li>
-		</ul>
-	);
-};
-
-export default ({user}) => {
+export default function Header({user}) {
 	if (user) {
 		return (
 			<header className='header-main'>
 				<Container text>
 					<nav>
-						<ul>
-							{renderUserDetails(user)}
-						</ul>
+						<UserNav user={user}/>
 					</nav>
 				</Container>
 			</header>
@@ -40,9 +22,13 @@ export default ({user}) => {
 		<header className='header-main'>
 			<Container text>
 				<nav>
-					{renderNav()}
+					<Nav />
 				</nav>
 			</Container>
 		</header>
 	);
+}
+
+Header.propTypes = {
+	user: PropTypes.object
 };

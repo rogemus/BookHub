@@ -1,4 +1,4 @@
-FROM python:3.6-slim
+FROM python:3.6-slim@sha256:29cb934ac1cb6c973c5be7b0452a975879c0280d80970458c221f57f26df2085
 LABEL version="1.0"
 LABEL maintainer="bookhub@corporation.com"
 

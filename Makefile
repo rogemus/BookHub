@@ -26,3 +26,6 @@ create_fixtures:
 		--exclude sessions.session \
 		--exclude contenttypes \
 		--indent 4 > demo.json
+
+maciej:
+    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up

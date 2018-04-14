@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./BookHub
+      dockerfile: $PWD/docker/backend/Dockerfile
+    command: 'python manage.py runserver 0.0.0.0:8000'
+    volumes:
+      - './BookHub:/app'
+    environment:
+      - DJANGO_SETTINGS_MODULE=BookHub.settings.local
+    ports:
+      - '8000:8000'
+  frontend:
+    build:
+      context: ./BookHub-frontend
+      dockerfile: $PWD/docker/bookhub/Dockerfile
+
+

@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  backend:
+    image: bookhub/backend:latest
+  frontend:
+    image: bookhub/frontend:latest

@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  frontend:
+    image: frontend:prod
+    build:
+      context: ./BookHub-frontend
+      dockerfile: $PWD/docker/frontend/Dockerfile
+
+
+

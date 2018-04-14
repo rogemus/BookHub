@@ -1,21 +1,20 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
 	Card
 } from 'semantic-ui-react';
 
-const bookTitle = (id, title) => {
-	return (
-		<Link to={`books/${id}`}>{title}</Link>
-	);
-};
-
-export default ({book}) => {
+export default function ListingItem({book}) {
 	return (
 		<Card
 			image={book.image_url}
-			header={bookTitle(book.id, book.title)}
+			header={<Link to={`books/${book.id}`}>{book.title}</Link>}
 			meta={book.publisher.name}
 		/>
 	);
+}
+
+ListingItem.propTypes = {
+	book: PropTypes.object.isRequired
 };

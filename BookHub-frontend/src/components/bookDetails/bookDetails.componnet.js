@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {
 	Grid,
@@ -19,16 +20,17 @@ const authors = (authors) => {
 	);
 };
 
-export default ({book}) => {
+export default function BookDetails({book}) {
 	return (
 		<Grid divided='vertically'>
 			<Grid.Row columns={2}>
 				<Grid.Column>
-					<Image src={book.image_url}/>
+					<Image src={book.image_url} />
 				</Grid.Column>
 				<Grid.Column>
 					<Header as='h1'>{book.title}</Header>
 					<Header as='h3'>{book.publisher.name}</Header>
+					<Divider />
 					<Header as='h5'>{authors(book.authors)}</Header>
 					<Divider/>
 					<p>
@@ -40,4 +42,8 @@ export default ({book}) => {
 			</Grid.Row>
 		</Grid>
 	);
+}
+
+BookDetails.propTypes = {
+	book: PropTypes.object.isRequired
 };

@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
-import {connect} from 'react-redux';
-import {getBooks} from '../../actions/books.actions';
+import { connect } from 'react-redux';
+import { getBooks } from '../../actions/books.actions';
 import Listing from '../../components/listing/listing.component';
 
 class HomePage extends Component {
@@ -13,7 +14,7 @@ class HomePage extends Component {
 
 	renderList() {
 		if (!isEmpty(this.props.books)) {
-			return <Listing items={this.props.books}/>;
+			return <Listing items={this.props.books} />;
 		}
 	}
 
@@ -32,6 +33,11 @@ function mapStateToProps(state) {
 		books: state.books.booksList
 	};
 }
+
+HomePage.propTypes = {
+	books: PropTypes.array,
+	getBooks: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, {getBooks})(HomePage);
 

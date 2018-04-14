@@ -6,9 +6,9 @@
 .listing .listing-item {
     padding: 0 15px 0 0;
     max-width: 33.3333%;
-    margin: 0 0 15px 0;
+    margin-bottom: 15px;
 }
 
-.listing .card:nth-child(3n) {
+.listing .listing-item:nth-child(3n) {
     padding: 0;
 }

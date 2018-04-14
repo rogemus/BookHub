@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:latest@sha256:18156dcd747677b03968621b2729d46021ce83a5bc15118e5bcced925fb4ebb9
 LABEL version="1.0"
 LABEL maintainer="bookhub@corporation.com"
 

@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
+import { queryStringToJSON } from '../../helpers/query';
 import { getBooks } from '../../actions/books.actions';
 import Listing from '../../components/listing/listing.component';
 
-class HomePage extends Component {
-	componentDidMount() {
-		document.title = 'BookHub | Home Page';
+class ListingPage extends Component {
+	constructor(props) {
+		super(props);
 
-		this.props.getBooks();
+		this.queryParams = queryStringToJSON(this.props.location.search);
+	}
+
+	componentDidMount() {
+		document.title = 'BookHub | Listing';
+
+		this.props.getBooks(this.queryParams);
 	}
 
 	renderList() {
@@ -21,7 +28,6 @@ class HomePage extends Component {
 	render() {
 		return (
 			<div>
-				<h1> Home </h1>
 				{this.renderList()}
 			</div>
 		);
@@ -34,10 +40,11 @@ function mapStateToProps(state) {
 	};
 }
 
-HomePage.propTypes = {
+ListingPage.propTypes = {
 	books: PropTypes.array,
-	getBooks: PropTypes.func.isRequired
+	getBooks: PropTypes.func.isRequired,
+	location: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, {getBooks})(HomePage);
+export default connect(mapStateToProps, {getBooks})(ListingPage);
 

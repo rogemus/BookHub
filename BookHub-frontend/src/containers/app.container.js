@@ -10,6 +10,7 @@ import {
 
 import HomePage from './homePage/homePage.container';
 import BookPage from './bookPage/bookPage.container';
+import ListingPage from './listingPage/listingPage.container';
 import RegisterPage from './registerPage/registerPage.container';
 import LoginPage from './loginPage/loginPage.container';
 
@@ -35,6 +36,7 @@ class App extends Component {
 						<Container text>
 							<Switch>
 								<Route exact path="/" component={HomePage}/>
+								<Route path="/listing" component={ListingPage}/>
 								<Route path="/books/:id" component={BookPage}/>
 								<Route exact path="/register" component={RegisterPage}/>
 								<Route exact path="/login" component={LoginPage}/>

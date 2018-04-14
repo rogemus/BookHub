@@ -14,7 +14,7 @@ const instance = axios.create({
 
 export function _get(path, config, actionType) {
 	return (dispatch) => {
-		return instance.get(`${API_URL}/${path}/`, config)
+		return instance.get(`${API_URL}/${path}/`, {params: config})
 			.then((response) => {
 				dispatch({
 					payload: response.data,

@@ -4,7 +4,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
-const base = require('./webpack.make')();
+const base = require('./webpack.make')('production');
 
 module.exports = Object.assign(
 	{},

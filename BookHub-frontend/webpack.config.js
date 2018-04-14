@@ -1,4 +1,4 @@
-const base = require('./webpack.make')();
+const base = require('./webpack.make')('development');
 const path = require('path');
 
 module.exports = Object.assign(

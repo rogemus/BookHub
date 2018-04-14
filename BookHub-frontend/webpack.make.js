@@ -1,11 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 require('babel-polyfill');
 
-module.exports = () => {
+module.exports = (mode) => {
 	return {
 		entry: {
 			'bundle': ['babel-polyfill', './src/index.js']
@@ -57,10 +56,8 @@ module.exports = () => {
 				}
 			]
 		},
+		mode: mode,
 		plugins: [
-			new StyleLintPlugin({
-				configFile: '.stylelintrc.json'
-			}),
 			new FriendlyErrorsWebpackPlugin(),
 			//new BundleAnalyzerPlugin()
 		],

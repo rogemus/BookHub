@@ -4470,7 +4470,7 @@ methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
-micromatch@^2.3.0, micromatch@^2.3.11, micromatch@^2.3.7:
+micromatch@^2.3.11, micromatch@^2.3.7:
   version "2.3.11"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-2.3.11.tgz#86677c97d1720b363431d04d0d15293bd38c1565"
   dependencies:
@@ -4488,7 +4488,7 @@ micromatch@^2.3.0, micromatch@^2.3.11, micromatch@^2.3.7:
     parse-glob "^3.0.4"
     regex-cache "^0.4.2"
 
-micromatch@^3.1.4:
+micromatch@^3.1.4, micromatch@^3.1.8:
   version "3.1.10"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"
   dependencies:
@@ -6802,12 +6802,12 @@ style-search@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/style-search/-/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
 
-stylelint-webpack-plugin@0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/stylelint-webpack-plugin/-/stylelint-webpack-plugin-0.10.1.tgz#16264256aea3f73eb30aba0adbc30b3bec3e4bea"
+stylelint-webpack-plugin@0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/stylelint-webpack-plugin/-/stylelint-webpack-plugin-0.10.4.tgz#08d52666bcdc1e9808ebcdabfde555b15a839a34"
   dependencies:
     arrify "^1.0.1"
-    micromatch "^2.3.0"
+    micromatch "^3.1.8"
     object-assign "^4.1.0"
     ramda "^0.25.0"
 

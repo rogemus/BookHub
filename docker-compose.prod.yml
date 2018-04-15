@@ -19,15 +19,17 @@ services:
         - frontend
   backend:
     container_name: backend
+    environment:
+     - RUNTIME_ENV=prod
+     - DJANGO_SECRET_KEY=dtk!gxxil#3=+p%o9_+wmg^nyxt=c6*k@(f7aqw#ct4vjdl=0#
     volumes:
         - backend-statics:/static
     expose:
-      - '8000'
+      - '8080'
   frontend:
     container_name: frontend
     volumes:
       - 'frontend-app:/app'
-
 
 volumes:
   backend-statics:

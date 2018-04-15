@@ -1,0 +1,19 @@
+FROM python:3.6.5-alpine3.6
+
+LABEL version "1.0"
+LABEL maintainer "BookHub Corporation <technical@bookhub.com>"
+
+ENV RUNTIME_ENV "dev"
+ENV DJANGO_SETTINGS_MODULE "BookHub.settings.${RUNTIME_ENV}"
+
+WORKDIR /app
+
+COPY ./requirements/*.txt /app/requirements/
+
+RUN pip install --no-cache-dir -r ./requirements/${RUNTIME_ENV}.txt
+
+COPY . /app
+
+EXPOSE 8080
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]

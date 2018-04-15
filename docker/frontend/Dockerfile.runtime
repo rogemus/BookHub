@@ -7,13 +7,13 @@ COPY package*.json yarn.lock ./
 
 RUN npm install
 
-COPY . .
+COPY . /app
 
 RUN npm run build:prod
 
 
 # Stage 2 - the production environment
-FROM node:8.11.1-alpine
+FROM alpine:3.7
 
 LABEL version "1.0"
 LABEL maintainer "BookHub Corporation <technical@bookhub.com>"

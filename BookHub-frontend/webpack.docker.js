@@ -7,7 +7,7 @@ module.exports = Object.assign(
 	{
 		devServer: {
 			contentBase: path.join(__dirname, 'public'),
-			host: "0.0.0.0",
+			host: '0.0.0.0',
 			port: 8000,
 			proxy: [{
 				context: ['/accounts', '/api'],

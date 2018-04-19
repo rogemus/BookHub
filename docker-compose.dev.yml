@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  backend:
+    image: bookhub/backend:dev
+    container_name: backend
+    build:
+      context: ./BookHub
+      dockerfile: $PWD/docker/backend/Dockerfile.dev
+    volumes:
+      - './BookHub:/app'
+    environment:
+      - RUNTIME_ENV=dev
+    ports:
+      - '8080:8080'
+  frontend:
+    image: bookhub/frontend:dev
+    container_name: frontend
+    build:
+      context: ./BookHub-frontend
+      dockerfile: $PWD/docker/frontend/Dockerfile.dev
+    ports:
+      - '8000:8000'
+    depends_on:
+      - backend

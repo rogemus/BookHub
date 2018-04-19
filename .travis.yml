@@ -3,7 +3,7 @@ matrix:
     - language: python
       python: 3.6
       env:
-        - DJANGO_SETTINGS_MODULE='BookHub.settings.local'
+        - DJANGO_SETTINGS_MODULE='BookHub.settings.test'
       install:
         - pip install -r BookHub/requirements/test.txt
       script:

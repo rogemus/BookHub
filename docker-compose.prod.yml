@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  reverseproxy:
+    image: nginx:1.13.12-alpine
+    container_name: reverseproxy
+    volumes:
+      - './docker/reverseproxy/snippets:/etc/nginx/snippets'
+      - './docker/reverseproxy/certs:/etc/ssl/certs'
+      - './docker/reverseproxy/conf.d:/etc/nginx/conf.d/'
+      - './docker/reverseproxy/nginx.conf:/etc/nginx/nginx.conf'
+      - 'backend-statics:/static'
+      - 'frontend-app:/var/www/bookhub.com'
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+        - backend
+        - frontend
+  backend:
+    container_name: backend
+    environment:
+     - RUNTIME_ENV=prod
+     - DJANGO_SECRET_KEY=dtk!gxxil#3=+p%o9_+wmg^nyxt=c6*k@(f7aqw#ct4vjdl=0#
+    volumes:
+        - backend-statics:/static
+    expose:
+      - '8080'
+  frontend:
+    container_name: frontend
+    volumes:
+      - 'frontend-app:/app'
+
+volumes:
+  backend-statics:
+  frontend-app:

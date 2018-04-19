@@ -1,0 +1,16 @@
+FROM node:8.11.1
+
+LABEL version "1.0"
+LABEL maintainer "BookHub Corporation <technical@bookhub.com>"
+
+WORKDIR /app
+
+COPY package*.json yarn.lock ./
+
+RUN npm install
+
+COPY . /app
+
+EXPOSE 8000
+
+CMD ["npm", "run", "docker:server"]

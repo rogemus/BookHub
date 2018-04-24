@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import { getBook } from '../../actions/book.actions';
-import { getComments } from '../../actions/comments.actions';
+import { getComments, createComment } from '../../actions/comments.actions';
 import BookDetails from '../../components/bookDetails/bookDetails.componnet';
 import CommentsList from '../../components/commentsList/commentsList.component';
 
@@ -11,7 +11,9 @@ class BookPage extends Component {
 	constructor(props) {
 		super(props);
 
-		this.handleCommentsSubmit = this.handleCommentsSubmit.bind(this);
+		this.state = {
+			commentContent: ''
+		};
 	}
 
 	componentDidMount() {
@@ -23,8 +25,13 @@ class BookPage extends Component {
 		document.title = `BookHub | ${this.props.book.title}`;
 	}
 
-	handleCommentsSubmit(e) {
-		console.log(e);
+	handleCommentsSubmit() {
+		this.props.createComment(this.props.match.params.id, this.state.commentContent, this.props.token)
+			.then(() => this.props.getComments(this.props.match.params.id));
+	}
+
+	handleCommentChange(e) {
+		this.setState({commentContent: e.target.value});
 	}
 
 	renderBookDetails() {
@@ -38,9 +45,11 @@ class BookPage extends Component {
 	renderComments() {
 		if (!isEmpty(this.props.commentsList)) {
 			return <CommentsList
+				value={this.state.commentContent}
 				isUserLogin={this.props.isUserLogin}
 				commentsList={this.props.commentsList}
-				onSubmit={this.handleCommentsSubmit} />;
+				handleChange={this.handleCommentChange.bind(this)}
+				handleSubmit={this.handleCommentsSubmit.bind(this)} />;
 		}
 	}
 
@@ -67,6 +76,7 @@ function mapStateToProps(state) {
 BookPage.propTypes = {
 	getBook: PropTypes.func.isRequired,
 	getComments: PropTypes.func.isRequired,
+	createComment: PropTypes.func.isRequired,
 	currentUser: PropTypes.object.isRequired,
 	token: PropTypes.string.isRequired,
 	isUserLogin: PropTypes.bool.isRequired,
@@ -75,5 +85,5 @@ BookPage.propTypes = {
 	commentsList: PropTypes.array.isRequired
 };
 
-export default connect(mapStateToProps, {getBook, getComments})(BookPage);
+export default connect(mapStateToProps, {getBook, getComments, createComment})(BookPage);
 

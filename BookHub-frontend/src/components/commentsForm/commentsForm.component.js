@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 export default class CommentsForm extends React.Component {
 	render() {
 		return (
-			<Form onSubmit={this.props.onSubmit}>
-				<Form.TextArea />
+			<Form onSubmit={this.props.handleSubmit}>
+				<Form.TextArea onChange={this.props.handleChange} value={this.props.value} />
 				<Button content='Add Comment' labelPosition='left' icon='edit' primary />
 			</Form>
 		);
@@ -14,5 +14,7 @@ export default class CommentsForm extends React.Component {
 }
 
 CommentsForm.propTypes = {
-	onSubmit: PropTypes.func.isRequired
+	handleChange: PropTypes.func.isRequired,
+	handleSubmit: PropTypes.func.isRequired,
+	value: PropTypes.string.isRequired
 };

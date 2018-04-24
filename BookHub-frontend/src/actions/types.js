@@ -4,6 +4,7 @@ export const GET_BOOKS = 'get_books';
 
 /* COMMENTS */
 export const GET_COMMENTS = 'get_comments';
+export const CREATE_COMMENT = 'create_comment';
 
 /* ERRORS */
 export const ERRORS = 'errors';

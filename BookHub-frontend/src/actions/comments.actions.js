@@ -1,5 +1,5 @@
-import { _get } from './axios.actions';
-import { GET_COMMENTS } from './types';
+import { _get, _post } from './axios.actions';
+import { GET_COMMENTS, CREATE_COMMENT } from './types';
 
 export function getComments(bookID) {
 	const config = {
@@ -13,8 +13,16 @@ export function getComments(bookID) {
 export function createComment(bookID, comment, token) {
 	const config = {
 		path: `books/${bookID}/comments`,
-		type: GET_COMMENTS
+		type: CREATE_COMMENT,
+		conf: {
+			data: {
+				text: comment
+			},
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		}
 	};
 
-	return _get(config.path, {}, config.type);
+	return _post(config.path, config.conf, config.type);
 }

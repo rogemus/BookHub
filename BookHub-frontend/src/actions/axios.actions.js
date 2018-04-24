@@ -32,6 +32,9 @@ export function _get(path, config, actionType) {
 }
 
 export function _post(path, config, actionType, redirectPath, noApiUrl) {
+	const requestConfig = {
+		method: 'POST'
+	};
 	let url = `${API_URL}/${path}/`;
 
 	if (noApiUrl) {
@@ -39,7 +42,7 @@ export function _post(path, config, actionType, redirectPath, noApiUrl) {
 	}
 
 	return (dispatch) => {
-		return instance.post(url, config)
+		return instance(Object.assign(requestConfig, {url: url}, config))
 			.then((response) => {
 				dispatch({
 					payload: response.data,

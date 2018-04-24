@@ -11,7 +11,10 @@ export default class CommentsList extends React.Component {
 
 	renderForm() {
 		if (this.props.isUserLogin) {
-			return <CommentsForm onSubmit={this.props.onSubmit} />;
+			return <CommentsForm
+				value={this.props.value}
+				handleChange={this.props.handleChange}
+				handleSubmit={this.props.handleSubmit} />;
 		}
 	}
 
@@ -27,7 +30,9 @@ export default class CommentsList extends React.Component {
 }
 
 CommentsList.propTypes = {
-	onSubmit: PropTypes.func.isRequired,
+	handleSubmit: PropTypes.func.isRequired,
+	handleChange: PropTypes.func.isRequired,
 	commentsList: PropTypes.array.isRequired,
-	isUserLogin: PropTypes.bool.isRequired
+	isUserLogin: PropTypes.bool.isRequired,
+	value: PropTypes.string.isRequired
 };

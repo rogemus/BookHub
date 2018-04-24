@@ -1,15 +1,15 @@
 import {
-	GET_BOOKS
+	GET_COMMENTS
 } from '../actions/types';
 
 const INITIAL_STATE = {
-	booksList: []
+	list: []
 };
 
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case GET_BOOKS:
-			return {...state, booksList: action.payload.results};
+		case GET_COMMENTS:
+			return {...state, list: action.payload.results};
 	}
 
 	return state;

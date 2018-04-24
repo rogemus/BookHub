@@ -3,7 +3,11 @@ import {
 	CLEAR_ERRORS
 } from '../actions/types';
 
-export default (state = {}, action) => {
+const INITIAL_STATE = {
+	errorContent: {}
+};
+
+export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case ERRORS:
 			return {...state, errorContent: action.payload};

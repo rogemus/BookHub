@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
 	ERRORS,
-	SET_CURRENT_USER
+	SET_CURRENT_USER,
+	SET_TOKEN
 } from './types';
 
 const API_URL = '/api';
@@ -31,6 +32,9 @@ export function _get(path, config, actionType) {
 }
 
 export function _post(path, config, actionType, redirectPath, noApiUrl) {
+	const requestConfig = {
+		method: 'POST'
+	};
 	let url = `${API_URL}/${path}/`;
 
 	if (noApiUrl) {
@@ -38,7 +42,7 @@ export function _post(path, config, actionType, redirectPath, noApiUrl) {
 	}
 
 	return (dispatch) => {
-		return instance.post(url, config)
+		return instance(Object.assign(requestConfig, {url: url}, config))
 			.then((response) => {
 				dispatch({
 					payload: response.data,
@@ -63,8 +67,13 @@ export function _postLogin(path, config, actionType, redirectPath) {
 		return instance.post(`/${path}/`, config)
 			.then((response) => {
 				dispatch({
-					payload: response.data,
-					type: actionType
+					type: actionType,
+					payload: true
+				});
+
+				dispatch({
+					type: SET_TOKEN,
+					payload: response.data.token
 				});
 
 				dispatch({

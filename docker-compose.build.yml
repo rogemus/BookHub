@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./BookHub
+      dockerfile: $PWD/docker/backend/Dockerfile.runtime
+    environment:
+      - RUNTIME_ENV=prod
+  frontend:
+    build:
+      context: ./BookHub-frontend
+      dockerfile: $PWD/docker/frontend/Dockerfile.runtime

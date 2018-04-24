@@ -9,7 +9,8 @@
     "build:prod": "webpack --config webpack.prod.js",
     "watch": "webpack --watch --config webpack.dev.js",
     "lint": "./node_modules/.bin/eslint --ext .js src",
-    "dev:server": "./node_modules/.bin/webpack-dev-server --open"
+    "dev:server": "./node_modules/.bin/webpack-dev-server --open",
+    "docker:server": "./node_modules/.bin/webpack-dev-server --open --config webpack.docker.js"
   },
   "author": "Kacper Rogowski",
   "dependencies": {
@@ -45,10 +46,10 @@
     "hard-source-webpack-plugin": "0.6.4",
     "optimize-css-assets-webpack-plugin": "4.0.0",
     "postcss-loader": "2.1.4",
-    "style-loader": "0.20.3",
+    "style-loader": "0.21.0",
     "uglifyjs-webpack-plugin": "1.2.5",
     "url-loader": "1.0.1",
-    "webpack": "4.5.0",
+    "webpack": "4.6.0",
     "webpack-bundle-analyzer": "2.11.1",
     "webpack-cli": "2.0.14",
     "webpack-dev-server": "3.1.3"

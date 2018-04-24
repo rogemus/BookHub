@@ -44,6 +44,6 @@ export default class ErrorNotification extends React.Component {
 }
 
 ErrorNotification.propTypes = {
-	errors: PropTypes.array,
+	errors: PropTypes.object.isRequired,
 	onCloseClick: PropTypes.func.isRequired
 };

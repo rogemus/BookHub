@@ -1,0 +1,7 @@
+.dockerignore
+*/tests*
+*/*.sqlite3
+.DS_Store
+__pycache__
+*.pyc
+*.json

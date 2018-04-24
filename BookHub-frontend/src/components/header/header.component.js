@@ -5,13 +5,13 @@ import UserNav from '../userNav/userNav.component';
 import Nav from '../nav/nav.component';
 import './header.styles.css';
 
-export default function Header({user}) {
-	if (user) {
+export default function Header(props) {
+	if (props.isUserLogin) {
 		return (
 			<header className='header-main'>
 				<Container text>
 					<nav>
-						<UserNav user={user}/>
+						<UserNav user={props.user} />
 					</nav>
 				</Container>
 			</header>
@@ -30,5 +30,6 @@ export default function Header({user}) {
 }
 
 Header.propTypes = {
-	user: PropTypes.object
+	user: PropTypes.object.isRequired,
+	isUserLogin: PropTypes.bool.isRequired
 };

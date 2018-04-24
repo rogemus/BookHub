@@ -15,11 +15,13 @@ export function login(credential) {
 export function register(data) {
 	const config = {
 		path: 'accounts/register',
-		params: data,
 		type: REGISTER,
 		redirect: '/',
-		noApiUrl: true
+		noApiUrl: true,
+		conf: {
+			data: data
+		}
 	};
 
-	return _post(config.path, config.params, config.type, config.redirect, config.noApiUrl);
+	return _post(config.path, config.conf, config.type, config.redirect, config.noApiUrl);
 }

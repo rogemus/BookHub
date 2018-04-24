@@ -1,11 +1,20 @@
 import {
-	LOGIN
+	LOGIN,
+	SET_TOKEN
 } from '../actions/types';
 
-export default (state = {}, action) => {
+const INITIAL_STATE = {
+	token: '',
+	isLogin: false
+};
+
+export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case LOGIN:
-			return {...state, token: action.payload.token};
+			return {...state, isLogin: action.payload};
+		case SET_TOKEN: {
+			return {...state, token: action.payload};
+		}
 	}
 
 	return state;

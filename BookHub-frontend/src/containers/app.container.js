@@ -31,7 +31,7 @@ class App extends Component {
 			<Provider store={this.props.store}>
 				<Router>
 					<div>
-						<Header user={this.props.currentUser}/>
+						<Header isUserLogin={this.props.isUserLogin} user={this.props.currentUser} />
 
 						<Container text>
 							<Switch>
@@ -56,13 +56,15 @@ class App extends Component {
 function mapStateToProps(state) {
 	return {
 		errorContent: state.errors.errorContent,
-		currentUser: state.user.current
+		currentUser: state.user.current,
+		isUserLogin: state.authentication.isLogin
 	};
 }
 
 App.propTypes = {
-	errorContent: PropTypes.object,
-	currentUser: PropTypes.object,
+	errorContent: PropTypes.object.isRequired,
+	isUserLogin: PropTypes.bool.isRequired,
+	currentUser: PropTypes.object.isRequired,
 	store: PropTypes.object.isRequired,
 	clearErrors: PropTypes.func.isRequired
 };

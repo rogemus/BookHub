@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 import { Container } from 'semantic-ui-react';
 import UserNav from '../userNav/userNav.component';
 import Nav from '../nav/nav.component';
 import './header.styles.css';
 
 export default function Header({user}) {
-	if (user) {
+	if (!isEmpty(user)) {
 		return (
 			<header className='header-main'>
 				<Container text>

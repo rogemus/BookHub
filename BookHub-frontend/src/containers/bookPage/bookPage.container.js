@@ -37,7 +37,10 @@ class BookPage extends Component {
 
 	renderComments() {
 		if (!isEmpty(this.props.commentsList)) {
-			return <CommentsList commentsList={this.props.commentsList} onSubmit={this.handleCommentsSubmit} />;
+			return <CommentsList
+				user={this.props.currentUser}
+				commentsList={this.props.commentsList}
+				onSubmit={this.handleCommentsSubmit} />;
 		}
 	}
 
@@ -54,16 +57,18 @@ class BookPage extends Component {
 function mapStateToProps(state) {
 	return {
 		book: state.book.bookData,
-		commentsList: state.comments.list
+		commentsList: state.comments.list,
+		currentUser: state.user.current
 	};
 }
 
 BookPage.propTypes = {
-	getBook: PropTypes.func,
-	getComments: PropTypes.func,
-	book: PropTypes.object,
-	match: PropTypes.object,
-	commentsList: PropTypes.array
+	getBook: PropTypes.func.isRequired,
+	getComments: PropTypes.func.isRequired,
+	currentUser: PropTypes.object.isRequired,
+	book: PropTypes.object.isRequired,
+	match: PropTypes.object.isRequired,
+	commentsList: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps, {getBook, getComments})(BookPage);

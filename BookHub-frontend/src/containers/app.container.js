@@ -61,8 +61,8 @@ function mapStateToProps(state) {
 }
 
 App.propTypes = {
-	errorContent: PropTypes.object,
-	currentUser: PropTypes.object,
+	errorContent: PropTypes.object.isRequired,
+	currentUser: PropTypes.object.isRequired,
 	store: PropTypes.object.isRequired,
 	clearErrors: PropTypes.func.isRequired
 };

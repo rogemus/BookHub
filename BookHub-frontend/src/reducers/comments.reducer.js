@@ -1,15 +1,15 @@
 import {
-	LOGIN
+	GET_COMMENTS
 } from '../actions/types';
 
 const INITIAL_STATE = {
-	token: ''
+	list: []
 };
 
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case LOGIN:
-			return {...state, token: action.payload.token};
+		case GET_COMMENTS:
+			return {...state, list: action.payload.results};
 	}
 
 	return state;

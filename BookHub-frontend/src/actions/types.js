@@ -12,6 +12,7 @@ export const CLEAR_ERRORS = 'clear_errors';
 /* AUTHENTICATION */
 export const LOGIN = 'login';
 export const REGISTER = 'register';
+export const SET_TOKEN = 'set_token';
 
 /* USERS */
 export const SET_CURRENT_USER = 'set_current_user';

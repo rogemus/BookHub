@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
 	ERRORS,
-	SET_CURRENT_USER
+	SET_CURRENT_USER,
+	SET_TOKEN
 } from './types';
 
 const API_URL = '/api';
@@ -63,8 +64,13 @@ export function _postLogin(path, config, actionType, redirectPath) {
 		return instance.post(`/${path}/`, config)
 			.then((response) => {
 				dispatch({
-					payload: response.data,
-					type: actionType
+					type: actionType,
+					payload: true
+				});
+
+				dispatch({
+					type: SET_TOKEN,
+					payload: response.data.token
 				});
 
 				dispatch({

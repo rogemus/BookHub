@@ -1,5 +1,4 @@
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
 import { Comment, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import CommentsForm from '../commentsForm/commentsForm.component';
@@ -11,7 +10,7 @@ export default class CommentsList extends React.Component {
 	}
 
 	renderForm() {
-		if (!isEmpty(this.props.user)) {
+		if (this.props.isUserLogin) {
 			return <CommentsForm onSubmit={this.props.onSubmit} />;
 		}
 	}
@@ -30,5 +29,5 @@ export default class CommentsList extends React.Component {
 CommentsList.propTypes = {
 	onSubmit: PropTypes.func.isRequired,
 	commentsList: PropTypes.array.isRequired,
-	user: PropTypes.object.isRequired
+	isUserLogin: PropTypes.bool.isRequired
 };

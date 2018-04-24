@@ -9,3 +9,12 @@ export function getComments(bookID) {
 
 	return _get(config.path, {}, config.type);
 }
+
+export function createComment(bookID, comment, token) {
+	const config = {
+		path: `books/${bookID}/comments`,
+		type: GET_COMMENTS
+	};
+
+	return _get(config.path, {}, config.type);
+}

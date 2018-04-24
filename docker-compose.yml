@@ -2,6 +2,6 @@ version: '3'
 
 services:
   backend:
-    image: bookhub/backend:latest
+    image: bookhub/backend:latest@sha256:82e816868d68cd6869e6a2d4e6fa10deb43f4ba4841f9a353550e1a0ae08dd93
   frontend:
-    image: bookhub/frontend:latest
+    image: bookhub/frontend:latest@sha256:ad89a3e03d74f42da3e3977a32e18cc64e824e175a5ad2954529e81aed7b422e

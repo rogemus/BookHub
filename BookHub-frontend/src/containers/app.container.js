@@ -14,6 +14,7 @@ import ListingPage from './listingPage/listingPage.container';
 import RegisterPage from './registerPage/registerPage.container';
 import LoginPage from './loginPage/loginPage.container';
 import LogoutPage from './logoutPage/logoutPage.container';
+import CurrentUserPage from './currentUserPage/currentUserPage.container';
 
 import { LOGIN, SET_CURRENT_USER, SET_TOKEN } from '../actions/types';
 
@@ -71,6 +72,7 @@ class App extends Component {
 								<Route exact path="/register" component={RegisterPage} />
 								<Route exact path="/login" component={LoginPage} />
 								<Route exact path="/logout" component={LogoutPage} />
+								<Route exact path="/me" component={CurrentUserPage} />
 							</Switch>
 
 							<ErrorsNotification

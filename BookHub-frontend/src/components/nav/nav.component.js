@@ -7,7 +7,7 @@ export default function Nav() {
 		<ul>
 			<li><Link to={'/'}><Icon name="home" /> Home</Link></li>
 			<li><Link to={'/login'}><Icon name="sign in" /> Sign in</Link></li>
-			<li><Link to={'/register'}><Icon name="add user " /> Register</Link></li>
+			<li><Link to={'/register'}><Icon name="add user" /> Register</Link></li>
 		</ul>
 	);
 }

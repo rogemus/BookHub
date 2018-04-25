@@ -14,9 +14,18 @@ const instance = axios.create({
 	}
 });
 
-export function _get(path, config, actionType) {
+export function _get(path, config, actionType, noApiUrl) {
+	const requestConfig = {
+		method: 'GET',
+		url: `${API_URL}/${path}/`
+	};
+
+	if (noApiUrl) {
+		requestConfig.url = `/${path}/`;
+	}
+
 	return (dispatch) => {
-		return instance.get(`${API_URL}/${path}/`, {params: config})
+		return instance(Object.assign(requestConfig, config))
 			.then((response) => {
 				dispatch({
 					payload: response.data,
@@ -34,16 +43,16 @@ export function _get(path, config, actionType) {
 
 export function _post(path, config, actionType, redirectPath, noApiUrl) {
 	const requestConfig = {
-		method: 'POST'
+		method: 'POST',
+		url: `${API_URL}/${path}/`
 	};
-	let url = `${API_URL}/${path}/`;
 
 	if (noApiUrl) {
-		url = `/${path}/`;
+		requestConfig.url = `/${path}/`;
 	}
 
 	return (dispatch) => {
-		return instance(Object.assign(requestConfig, {url: url}, config))
+		return instance(Object.assign(requestConfig, config))
 			.then((response) => {
 				dispatch({
 					payload: response.data,

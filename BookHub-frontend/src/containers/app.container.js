@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect, Provider} from 'react-redux';
-import {Container} from 'semantic-ui-react';
+import React, { Component } from 'react';
+import { connect, Provider } from 'react-redux';
+import { Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import {
 	HashRouter as Router,
@@ -13,17 +13,47 @@ import BookPage from './bookPage/bookPage.container';
 import ListingPage from './listingPage/listingPage.container';
 import RegisterPage from './registerPage/registerPage.container';
 import LoginPage from './loginPage/loginPage.container';
+import LogoutPage from './logoutPage/logoutPage.container';
+
+import { LOGIN, SET_CURRENT_USER, SET_TOKEN } from '../actions/types';
 
 import ErrorsNotification from '../components/errorNotification/errorNotification.component';
 import Header from '../components/header/header.component';
-import {clearErrors} from '../actions/errors.actions';
+import { clearErrors } from '../actions/errors.actions';
 
 import 'semantic-ui-css/semantic.min.css';
 import '../styles/main.css';
 
 class App extends Component {
+	componentWillMount() {
+		this.populateUser();
+	}
+
 	handleErrorClick() {
 		this.props.clearErrors();
+	}
+
+	populateUser() {
+		const token = JSON.parse(localStorage.getItem('token'));
+		const current_user = JSON.parse(localStorage.getItem('currentUser'));
+		const isUserLogin = JSON.parse(localStorage.getItem('isUserLogin'));
+
+		if (isUserLogin) {
+			this.props.store.dispatch({
+				type: LOGIN,
+				payload: isUserLogin
+			});
+
+			this.props.store.dispatch({
+				type: SET_TOKEN,
+				payload: token
+			});
+
+			this.props.store.dispatch({
+				type: SET_CURRENT_USER,
+				payload: current_user
+			});
+		}
 	}
 
 	render() {
@@ -35,16 +65,18 @@ class App extends Component {
 
 						<Container text>
 							<Switch>
-								<Route exact path="/" component={HomePage}/>
-								<Route path="/listing" component={ListingPage}/>
-								<Route path="/books/:id" component={BookPage}/>
-								<Route exact path="/register" component={RegisterPage}/>
-								<Route exact path="/login" component={LoginPage}/>
+								<Route exact path="/" component={HomePage} />
+								<Route path="/listing" component={ListingPage} />
+								<Route path="/books/:id" component={BookPage} />
+								<Route exact path="/register" component={RegisterPage} />
+								<Route exact path="/login" component={LoginPage} />
+								<Route exact path="/logout" component={LogoutPage} />
 							</Switch>
 
 							<ErrorsNotification
 								errors={this.props.errorContent}
-								onCloseClick={this.handleErrorClick.bind(this)}/>
+								onCloseClick={this.handleErrorClick.bind(this)}
+							/>
 						</Container>
 					</div>
 				</Router>

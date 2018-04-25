@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
 	ERRORS,
 	SET_CURRENT_USER,
-	SET_TOKEN
+	SET_TOKEN,
+	LOGIN
 } from './types';
 
 const API_URL = '/api';
@@ -62,27 +63,35 @@ export function _post(path, config, actionType, redirectPath, noApiUrl) {
 	};
 }
 
-export function _postLogin(path, config, actionType, redirectPath) {
+export function _postLogin(path, config, redirectPath) {
 	return (dispatch) => {
 		return instance.post(`/${path}/`, config)
 			.then((response) => {
+				const isUserLogin = true;
+				const token = response.data.token;
+				const user = {
+					email: response.data.email,
+					username: response.data.username
+				};
+
 				dispatch({
-					type: actionType,
-					payload: true
+					type: LOGIN,
+					payload: isUserLogin
 				});
 
 				dispatch({
 					type: SET_TOKEN,
-					payload: response.data.token
+					payload: token
 				});
 
 				dispatch({
 					type: SET_CURRENT_USER,
-					payload: {
-						email: response.data.email,
-						username: response.data.username
-					}
+					payload: user
 				});
+
+				localStorage.setItem('currentUser', JSON.stringify(user));
+				localStorage.setItem('token', JSON.stringify(token));
+				localStorage.setItem('isUserLogin', JSON.stringify(isUserLogin));
 
 				if (typeof redirectPath !== 'undefined') {
 					window.location.hash = redirectPath;

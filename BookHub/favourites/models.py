@@ -13,6 +13,3 @@ class Favourite(models.Model):
         unique_together = (
             ("book", "user"),
         )
-
-    def __str__(self):
-        return f'{self.user} ❤️ {self.book}'

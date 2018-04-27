@@ -8,7 +8,8 @@ class FavouriteInline(admin.TabularInline):
 
 
 class FavouriteAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('user', 'book', 'added_at',)
+    search_fields = ('user', 'book',)
 
 
 admin.site.register(Favourite, FavouriteAdmin)

@@ -181,5 +181,37 @@
         "is_public": true,
         "is_removed": false
     }
-}
-]
+},
+{
+    "model": "favourites.favourite",
+    "pk": 1,
+    "fields": {
+        "book": "0862a3ef-020e-408b-82e3-93b875a7b545",
+        "user": [
+            "book_hub_user"
+        ],
+        "added_at": "2018-04-27T14:16:13.046Z"
+    }
+},
+{
+    "model": "favourites.favourite",
+    "pk": 2,
+    "fields": {
+        "book": "db8f85d4-47dd-488d-a1a6-105d98eccc87",
+        "user": [
+            "admin"
+        ],
+        "added_at": "2018-04-27T14:16:26.026Z"
+    }
+},
+{
+    "model": "favourites.favourite",
+    "pk": 3,
+    "fields": {
+        "book": "db8f85d4-47dd-488d-a1a6-105d98eccc87",
+        "user": [
+            "book_hub_user"
+        ],
+        "added_at": "2018-04-27T14:16:33.173Z"
+    }
+}]

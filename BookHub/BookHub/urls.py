@@ -8,6 +8,7 @@ from books import views
 from books.views import BookHubApi
 from comments.views import CommentViewSet
 from accounts import urls as accounts_urls
+from favourites.views import FavouriteViewSet
 from users.views import UserViewSet
 
 
@@ -22,12 +23,16 @@ api_router.register(r'publishers', views.PublisherViewSet)
 api_router.register(r'users', UserViewSet)
 
 
-domains_router = nested_routers.NestedSimpleRouter(api_router, r'books', lookup='books')
-domains_router.register(r'comments', CommentViewSet, base_name='book-comments')
+books_router = nested_routers.NestedSimpleRouter(api_router, r'books', lookup='books')
+books_router.register(r'comments', CommentViewSet, base_name='book-comments')
+
+users_router = nested_routers.NestedSimpleRouter(api_router, r'users', lookup='users')
+users_router.register(r'favourites', FavouriteViewSet, base_name='user-favourites')
 
 api_urlpatterns = [
     url('^', include(api_router.urls)),
-    url('^', include(domains_router.urls)),
+    url('^', include(books_router.urls)),
+    url('^', include(users_router.urls)),
 ]
 
 urlpatterns = [

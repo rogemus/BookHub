@@ -30,7 +30,6 @@ ALLOWED_HOSTS = []
 
 APPEND_SLASH = True
 
-
 AUTH_USER_MODEL = 'accounts.BookHubUser'
 
 # Application definition
@@ -45,10 +44,11 @@ BASE_APPS = [
 ]
 
 PROJECT_APPS = [
-    'accounts.apps.AccountsConfig',
     'books.apps.BooksConfig',
     'comments.apps.CommentsConfig',
     'users.apps.UsersConfig',
+    'favourites.apps.FavoritesConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 EXTENSION_APPS = [
@@ -142,6 +142,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 50,
     'URL_FIELD_NAME': 'api_url',
+    'NON_FIELD_ERRORS_KEY': 'message',
 }
 
 JWT_AUTH = {
@@ -153,3 +154,4 @@ JWT_AUTH = {
 COMMENT_SNIPPET_LENGTH = 30
 
 BOOK_LAST_COMMENTS = 3
+USER_LAST_FAVOURITES = 3

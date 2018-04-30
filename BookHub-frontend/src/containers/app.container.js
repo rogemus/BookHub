@@ -58,23 +58,24 @@ class App extends Component {
 		return (
 			<Provider store={this.props.store}>
 				<Router>
-					<div>
+					<div className='app'>
 						<Header isUserLogin={this.props.isUserLogin} user={this.props.currentUser} />
+						<div className="app-content">
+							<div className='wrapper'>
+								<Switch>
+									<Route exact path="/" component={HomePage} />
+									<Route path="/listing" component={ListingPage} />
+									<Route path="/books/:id" component={BookPage} />
+									<Route exact path="/register" component={RegisterPage} />
+									<Route exact path="/login" component={LoginPage} />
+									<Route exact path="/logout" component={LogoutPage} />
+								</Switch>
 
-						<div className='wrapper'>
-							<Switch>
-								<Route exact path="/" component={HomePage} />
-								<Route path="/listing" component={ListingPage} />
-								<Route path="/books/:id" component={BookPage} />
-								<Route exact path="/register" component={RegisterPage} />
-								<Route exact path="/login" component={LoginPage} />
-								<Route exact path="/logout" component={LogoutPage} />
-							</Switch>
-
-							<ErrorsNotification
-								errors={this.props.errorContent}
-								onCloseClick={this.handleErrorClick.bind(this)}
-							/>
+								<ErrorsNotification
+									errors={this.props.errorContent}
+									onCloseClick={this.handleErrorClick.bind(this)}
+								/>
+							</div>
 						</div>
 					</div>
 				</Router>

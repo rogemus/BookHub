@@ -3,8 +3,7 @@ bundle.js
 bundle.js.map
 bundle.css
 bundle.css.map
-url-loader
-fonts
+public/img
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -166,3 +165,4 @@ fabric.properties
 .idea
 *.sqlite3
 .DS_Store
+/BookHub-frontend/public/img/

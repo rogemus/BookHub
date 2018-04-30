@@ -62,7 +62,7 @@ class App extends Component {
 					<div>
 						<Header isUserLogin={this.props.isUserLogin} user={this.props.currentUser} />
 
-						<Container text>
+						<div className='wrapper'>
 							<Switch>
 								<Route exact path="/" component={HomePage} />
 								<Route path="/listing" component={ListingPage} />
@@ -76,7 +76,7 @@ class App extends Component {
 								errors={this.props.errorContent}
 								onCloseClick={this.handleErrorClick.bind(this)}
 							/>
-						</Container>
+						</div>
 					</div>
 				</Router>
 			</Provider>

@@ -1,0 +1,30 @@
+.form {
+	position: relative;
+	padding-top: 15px;
+	margin-top: 15px;
+
+	input[type=text] {
+		width: 100%;
+	}
+
+	textarea {
+		width: 100%;
+		border: 1px solid $placeholder-color-primary;
+		box-sizing: border-box;
+		padding: 15px;
+		color: $text-color-primary;
+		resize: vertical;
+		min-height: 100px;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 50%;
+		height: 1px;
+		background: $background-color-secondary;
+	}
+}

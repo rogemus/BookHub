@@ -9,9 +9,9 @@ import './heade.styles.scss';
 export default function Header(props) {
 	function renderSubNav(props) {
 		if (props.isUserLogin) {
-			return <Nav />;
-		} else {
 			return <UserNav user={props.user} />;
+		} else {
+			return <Nav />;
 		}
 	}
 

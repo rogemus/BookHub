@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './commetsListItem.styles.scss';
 
 export default class CommentsListItem extends React.Component {
 	renderDate(submit_date) {

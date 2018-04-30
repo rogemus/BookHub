@@ -31,8 +31,10 @@ export default function Header(props) {
 					<nav className="nav-main">
 						<ul>
 							<li><Link to={'/'}>Home</Link></li>
-							<li><Link to={'/'}>Categories</Link></li>
-							<li><Link to={'/'}>Contact</Link></li>
+							<li><Link to={'/'}>Page 2</Link></li>
+							<li><Link to={'/'}>Page 3</Link></li>
+							<li><Link to={'/'}>Page 4</Link></li>
+							<li><Link to={'/'}>Page 5</Link></li>
 						</ul>
 					</nav>
 				</div>

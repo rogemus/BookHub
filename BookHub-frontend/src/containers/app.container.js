@@ -20,6 +20,7 @@ import { LOGIN, SET_CURRENT_USER, SET_TOKEN } from '../actions/types';
 
 import ErrorsNotification from '../components/errorNotification/errorNotification.component';
 import Header from '../components/header/header.component';
+import Footer from '../components/footer/footer.component';
 import { clearErrors } from '../actions/errors.actions';
 
 class App extends Component {
@@ -77,6 +78,7 @@ class App extends Component {
 								/>
 							</div>
 						</div>
+						<Footer />
 					</div>
 				</Router>
 			</Provider>

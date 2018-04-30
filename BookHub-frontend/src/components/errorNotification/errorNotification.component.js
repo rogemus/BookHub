@@ -9,6 +9,10 @@ export default class ErrorNotification extends React.Component {
 		if (this.props.errors && !isEmpty(this.props.errors)) {
 			const content = this.parserErrors();
 
+			setTimeout(() => {
+				this.props.onCloseClick();
+			}, 5000);
+
 			return (
 				<div className='error-notification'>
 					<div onClick={this.props.onCloseClick} className="error-notification-close">

@@ -45,20 +45,6 @@ module.exports = (mode) => {
 							loader: 'sass-loader'
 						}
 					]
-				},
-				{
-					test: /\.(eot|svg|ttf|woff|woff2)$/,
-					loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
-				},
-				{
-					test: /\.(png|jp(e*)g)$/,
-					use: [{
-						loader: 'url-loader',
-						options: {
-							limit: 8000,
-							name: 'url-loader?name=images/[name].[ext]'
-						}
-					}]
 				}
 			]
 		},

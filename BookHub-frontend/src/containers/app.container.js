@@ -21,8 +21,7 @@ import ErrorsNotification from '../components/errorNotification/errorNotificatio
 import Header from '../components/header/header.component';
 import { clearErrors } from '../actions/errors.actions';
 
-import 'semantic-ui-css/semantic.min.css';
-import '../styles/main.css';
+import '../styles/main.scss';
 
 class App extends Component {
 	componentWillMount() {

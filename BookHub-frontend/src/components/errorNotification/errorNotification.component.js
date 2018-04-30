@@ -3,7 +3,6 @@ import map from 'lodash/map';
 import isEmpty from 'lodash/isEmpty';
 import { Message } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import './errorNotification.styles.css';
 
 export default class ErrorNotification extends React.Component {
 	renderErrors() {

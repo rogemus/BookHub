@@ -33,11 +33,17 @@ module.exports = (mode) => {
 					]
 				},
 				{
-					test: /\.css$/,
+					test: /\.scss$/,
 					use: [
-						'style-loader',
-						{loader: 'css-loader', options: {importLoaders: 1}},
-						'postcss-loader'
+						{
+							loader: 'style-loader'
+						},
+						{
+							loader: 'css-loader'
+						},
+						{
+							loader: 'sass-loader'
+						}
 					]
 				},
 				{
@@ -58,7 +64,7 @@ module.exports = (mode) => {
 		},
 		mode: mode,
 		plugins: [
-			new FriendlyErrorsWebpackPlugin(),
+			new FriendlyErrorsWebpackPlugin()
 			//new BundleAnalyzerPlugin()
 		],
 		devtool: 'source-map',

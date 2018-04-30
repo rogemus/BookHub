@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700');
+
+body {
+	@include font-size($text-size-base);
+
+	font-family: $text-base-font;
+	color: $text-color-primary;
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	li,
+	label,
+	input,
+	textarea,
+	th,
+	td,
+	address {
+		font-family: $text-base-font;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: $text-heading-font;
+		color: $black;
+	}
+
+	p,
+	li,
+	span,
+	label,
+	textarea,
+	input,
+	th,
+	td,
+	address {
+		@include font-size($text-size-base);
+
+		color: $text-color-primary;
+	}
+
+	a {
+		text-decoration: none;
+		transition-duration: 200ms;
+		color: $black;
+
+		&:hover,
+		&:focus {
+			color: $text-color-secondary;
+		}
+	}
+
+	input {
+		&::-webkit-input-placeholder,
+		&:-ms-input-placeholder,
+		&::-moz-placeholder {
+			@include font-size($text-size-base);
+
+			color: $silver;
+		}
+	}
+
+	h1 {
+		@include font-size($text-size-h1);
+	}
+
+	h2 {
+		@include font-size($text-size-h2);
+	}
+
+	h3 {
+		@include font-size($text-size-h3);
+	}
+
+	h4 {
+		@include font-size($text-size-h4);
+	}
+
+	h5 {
+		@include font-size($text-size-h5);
+	}
+
+	h6 {
+		@include font-size($text-size-h6);
+	}
+}

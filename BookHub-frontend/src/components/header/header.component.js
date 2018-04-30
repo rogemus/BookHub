@@ -1,30 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import UserNav from '../userNav/userNav.component';
 import Nav from '../nav/nav.component';
-import './header.styles.css';
+
+import './heade.styles.scss';
 
 export default function Header(props) {
-	if (props.isUserLogin) {
-		return (
-			<header className='header-main'>
-				<Container text>
-					<nav>
-						<UserNav user={props.user} />
-					</nav>
-				</Container>
-			</header>
-		);
+	function renderSubNav(props) {
+		if (props.isUserLogin) {
+			return <Nav />;
+		} else {
+			return <UserNav user={props.user} />;
+		}
 	}
 
 	return (
 		<header className='header-main'>
-			<Container text>
-				<nav>
-					<Nav />
-				</nav>
-			</Container>
+			<div className="header-sub">
+				<div className="wrapper">
+					{renderSubNav(props)}
+				</div>
+			</div>
+
+			<div className="header-nav">
+				<div className="wrapper">
+					<div className="header-logo">
+						<Link to={'/'}>BookHub</Link>
+					</div>
+					<nav className="nav-main">
+						<ul>
+							<li><Link to={'/'}>Home</Link></li>
+							<li><Link to={'/'}>Categories</Link></li>
+							<li><Link to={'/'}>Contact</Link></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</header>
 	);
 }

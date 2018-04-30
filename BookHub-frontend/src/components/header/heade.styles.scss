@@ -1,0 +1,73 @@
+@import "../../styles/configs/configs";
+
+.header-main {
+	.header-sub {
+		background: $background-color-primary;
+		padding: 10px 0;
+		text-align: right;
+	}
+
+	.header-logo {
+		align-self: center;
+		padding-right: 100px;
+
+		a {
+			font-family: $logo-font;
+			font-size: $font-large;
+			color: $text-color-secondary;
+		}
+	}
+
+	.header-nav {
+		background: $white;
+		box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.05);
+		padding: 20px 0;
+
+		> .wrapper {
+			display: flex;
+
+		}
+	}
+
+	.nav-main {
+		align-self: center;
+
+		a {
+			position: relative;
+
+			&:hover {
+				&:before {
+					width: 100%;
+					visibility: visible;
+				}
+			}
+
+			&:before {
+				content: '';
+				height: 2px;
+				background: $background-color-secondary;
+				width: 0;
+				visibility: hidden;
+				transition-duration: 200ms;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+			}
+		}
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+
+		li {
+			display: inline-block;
+			margin: 0 10px;
+
+			a {
+				padding: 5px 10px;
+				text-decoration: none;
+			}
+		}
+	}
+}

@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Pacifico');
-@import url('https://fonts.googleapis.com/css?family=Montserrat:700');
+@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat:600,700|Pacifico');
+
 
 body {
 	@include font-size($text-size-base);
@@ -31,6 +31,7 @@ body {
 	h5,
 	h6 {
 		font-family: $text-heading-font;
+		font-weight: 700;
 		color: $black;
 	}
 

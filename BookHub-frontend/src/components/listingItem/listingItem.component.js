@@ -13,9 +13,9 @@ export default function ListingItem({book}) {
 					</Link>
 				</div>
 				<div className="listing-item-header">
-					<h2>
+					<h3>
 						<Link to={`books/${book.id}`}>{book.title}</Link>
-					</h2>
+					</h3>
 				</div>
 				<div className="listing-item-meta">
 					{book.publisher.name}

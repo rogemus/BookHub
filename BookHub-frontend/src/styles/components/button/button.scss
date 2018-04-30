@@ -1,17 +1,16 @@
 .btn {
 	display: inline-block;
-	border: 2px solid $background-color-secondary;
-	color: $text-color-secondary;
+	color: $white;
 	font-family: $text-heading-font;
-	padding: 15px 25px;
+	border: 0;
+	padding: 20px 50px;
 	margin: 10px 0;
 	transition-duration: 200ms;
-	background: $white;
-	border-radius: 30px;
+	background: $background-color-secondary;
+	border-radius: 25px;
 	text-transform: uppercase;
 
 	&:hover {
-		color: $white;
-		background: $background-color-secondary;
+		background: $black;
 	}
 }

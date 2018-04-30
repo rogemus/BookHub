@@ -26,10 +26,18 @@
 	&:nth-child(odd) {
 		background: $background-color-primary;
 		color: $text-color-secondary;
+
+		.comment-content {
+			color: $text-color-primary
+		}
 	}
 
 	&:nth-child(even) {
 		background: $background-color-secondary;
 		color: $white;
+
+		.comment-content {
+			color: $white-rgba;
+		}
 	}
 }

@@ -68,9 +68,7 @@ export default function RegisterForm(props) {
 			</div>
 			}
 
-			{props.values.password &&
 			<button type='submit' className="btn">Submit</button>
-			}
 		</form>
 	);
 }

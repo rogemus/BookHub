@@ -55,7 +55,7 @@ class BookPage extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className='page-container'>
 				{this.renderBookDetails()}
 				{this.renderComments()}
 			</div>

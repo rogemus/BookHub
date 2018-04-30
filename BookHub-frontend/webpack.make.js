@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 require('babel-polyfill');
@@ -33,32 +34,30 @@ module.exports = (mode) => {
 					]
 				},
 				{
-					test: /\.css$/,
+					test: /\.scss$/,
+					use: ExtractTextPlugin.extract({
+						fallback: 'style-loader',
+						use: ['css-loader', 'sass-loader']
+					})
+				},
+				{
+					test: /\.(jpe?g|png|gif)$/,
 					use: [
-						'style-loader',
-						{loader: 'css-loader', options: {importLoaders: 1}},
-						'postcss-loader'
-					]
-				},
-				{
-					test: /\.(eot|svg|ttf|woff|woff2)$/,
-					loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
-				},
-				{
-					test: /\.(png|jp(e*)g)$/,
-					use: [{
-						loader: 'url-loader',
-						options: {
-							limit: 8000,
-							name: 'url-loader?name=images/[name].[ext]'
+						{
+							loader: 'url-loader',
+							options: {
+								limit: 8000,
+								name: 'img/[name].[ext]'
+							}
 						}
-					}]
+					]
 				}
 			]
 		},
 		mode: mode,
 		plugins: [
 			new FriendlyErrorsWebpackPlugin(),
+			new ExtractTextPlugin('bundle.css')
 			//new BundleAnalyzerPlugin()
 		],
 		devtool: 'source-map',

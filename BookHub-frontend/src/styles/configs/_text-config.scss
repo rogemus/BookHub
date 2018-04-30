@@ -1,0 +1,35 @@
+$pacifico: 'Pacifico', cursive;
+$montserrat: 'Montserrat', sans-serif;
+$lato: 'Lato', sans-serif;
+
+//font-size
+$font-x2-small: 8px;
+$font-x-small: 10px;
+$font-small: 12px;
+$font-minor: 14px;
+$font-base: 16px;
+$font-slight: 18px;
+$font-medium: 20px;
+$font-large: 24px;
+$font-x-large: 36px;
+$font-x2-large: 48px;
+
+$text-size-base: $font-base;
+$text-size-h1: $font-x-large;
+$text-size-h2: $font-large;
+$text-size-h3: $font-medium;
+$text-size-h4: $font-slight;
+$text-size-h5: $font-minor;
+$text-size-h6: $font-small;
+
+$text-size-base-mobile: $font-minor;
+$text-size-h1-mobile: $font-x-large;
+$text-size-h2-mobile: $font-large;
+$text-size-h3-mobile: $font-medium;
+$text-size-h4-mobile: $font-slight;
+$text-size-h5-mobile: $font-base;
+$text-size-h6-mobile: $font-minor;
+
+$text-base-font: $lato;
+$text-heading-font: $montserrat;
+$logo-font: $pacifico;

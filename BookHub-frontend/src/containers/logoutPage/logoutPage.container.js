@@ -12,9 +12,9 @@ class LogoutPage extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className='page-container'>
 				<h2> Bye Bye :* </h2>
-				<h1> See you soon </h1>
+				<h1> See you soon :) </h1>
 			</div>
 		);
 	}

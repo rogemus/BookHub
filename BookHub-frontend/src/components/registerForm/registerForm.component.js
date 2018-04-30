@@ -1,42 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'semantic-ui-react';
 
 export default function RegisterForm(props) {
 	return (
-		<Form onSubmit={props.handleSubmit}>
-			<Form.Field required>
-				<label>Username</label>
+		<form onSubmit={props.handleSubmit} className="form">
+			<div className='form-field'>
+				<label htmlFor='username'>Username</label>
 				<input
+					id='username'
 					placeholder='Username'
 					value={props.values.username}
 					onChange={props.handleChange}
 					name='username'
 					type='text'
+					required
 				/>
-			</Form.Field>
-			<Form.Field required>
-				<label>Name</label>
+			</div>
+			<div className='form-field'>
+				<label htmlFor='first_name'>Name</label>
 				<input
+					id='first_name'
 					placeholder='First Name'
 					value={props.values.first_name}
 					onChange={props.handleChange}
 					name='first_name'
+					required
 					type='text'
 				/>
-			</Form.Field>
-			<Form.Field required>
-				<label>Surname</label>
+			</div>
+			<div className='form-field'>
+				<label htmlFor="last_name">Surname</label>
 				<input
+					id='last_name'
 					placeholder='Last Name'
 					value={props.values.last_name}
 					onChange={props.handleChange}
 					name='last_name'
+					required
 					type='text'
 				/>
-			</Form.Field>
-			<Form.Field required>
-				<label>Email</label>
+			</div>
+			<div className='form-field'>
+				<label htmlFor='email'>Email</label>
 				<input
 					placeholder='Email'
 					required
@@ -44,11 +49,15 @@ export default function RegisterForm(props) {
 					onChange={props.handleChange}
 					name='email'
 					type='email'
+					id='email'
 				/>
-			</Form.Field>
-			<Form.Field required>
-				<label>Password</label>
+			</div>
+
+			{props.values.password &&
+			<div className='form-field'>
+				<label htmlFor='password'>Password</label>
 				<input
+					id='password'
 					placeholder='Password'
 					required
 					onChange={props.handleChange}
@@ -56,9 +65,11 @@ export default function RegisterForm(props) {
 					name='password'
 					type="password"
 				/>
-			</Form.Field>
-			<Button type='submit' primary>Submit</Button>
-		</Form>
+			</div>
+			}
+
+			<button type='submit' className="btn">Submit</button>
+		</form>
 	);
 }
 

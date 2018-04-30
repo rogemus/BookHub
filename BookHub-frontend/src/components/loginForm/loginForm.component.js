@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-	Form,
-	Button
-} from 'semantic-ui-react';
 
 export default function LoginForm(props) {
 	return (
-		<Form onSubmit={props.handleSubmit}>
-			<Form.Field required>
-				<label>Username</label>
+		<form onSubmit={props.handleSubmit} className="form">
+			<div className='form-field'>
+				<label htmlFor='username'>Username</label>
 				<input
 					placeholder='Username'
 					required
@@ -17,10 +13,11 @@ export default function LoginForm(props) {
 					onChange={props.handleChange}
 					name='username'
 					type='text'
+					id='username'
 				/>
-			</Form.Field>
-			<Form.Field required>
-				<label>Password</label>
+			</div>
+			<div className='form-field'>
+				<label htmlFor='password'>Password</label>
 				<input
 					placeholder='Password'
 					required
@@ -28,10 +25,11 @@ export default function LoginForm(props) {
 					value={props.values.password}
 					name='password'
 					type="password"
+					id='password'
 				/>
-			</Form.Field>
-			<Button type='submit' primary>Submit</Button>
-		</Form>
+			</div>
+			<button className="btn" type='submit'>Submit</button>
+		</form>
 	);
 }
 

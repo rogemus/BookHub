@@ -1,0 +1,38 @@
+@import "../../styles/configs/configs";
+
+.error-notification {
+	position: absolute;
+	width: 100%;
+	min-width: 350px;
+	max-width: 450px;
+	background: $white;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-sizing: border-box;
+	padding: 15px;
+	border-radius: 5px;
+	border: 2px solid $color-error;
+
+	.error-notification-header {
+		h4 {
+			margin: 5px;
+			padding: 0;
+			color: $color-error;
+		}
+	}
+
+	.error-notification-content p {
+		color: $text-color-secondary;
+	}
+
+	.error-notification-close {
+		@include font-size($text-size-h2);
+
+		position: absolute;
+		right: 15px;
+		top: 5px;
+		font-family: $text-heading-font;
+		cursor: pointer;
+	}
+}

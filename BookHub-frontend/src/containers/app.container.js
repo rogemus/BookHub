@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect, Provider } from 'react-redux';
-import { Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import {
 	HashRouter as Router,
 	Route,
 	Switch
 } from 'react-router-dom';
+
+import '../styles/main.scss';
 
 import HomePage from './homePage/homePage.container';
 import BookPage from './bookPage/bookPage.container';
@@ -20,10 +21,8 @@ import { LOGIN, SET_CURRENT_USER, SET_TOKEN } from '../actions/types';
 
 import ErrorsNotification from '../components/errorNotification/errorNotification.component';
 import Header from '../components/header/header.component';
+import Footer from '../components/footer/footer.component';
 import { clearErrors } from '../actions/errors.actions';
-
-import 'semantic-ui-css/semantic.min.css';
-import '../styles/main.css';
 
 class App extends Component {
 	componentWillMount() {
@@ -61,25 +60,27 @@ class App extends Component {
 		return (
 			<Provider store={this.props.store}>
 				<Router>
-					<div>
+					<div className='app'>
 						<Header isUserLogin={this.props.isUserLogin} user={this.props.currentUser} />
+						<div className="app-content">
+							<div className='wrapper'>
+								<Switch>
+									<Route exact path="/" component={HomePage} />
+									<Route path="/listing" component={ListingPage} />
+									<Route path="/books/:id" component={BookPage} />
+									<Route exact path="/register" component={RegisterPage} />
+									<Route exact path="/login" component={LoginPage} />
+									<Route exact path="/logout" component={LogoutPage} />
+									<Route exact path="/me" component={CurrentUserPage} />
+								</Switch>
 
-						<Container text>
-							<Switch>
-								<Route exact path="/" component={HomePage} />
-								<Route path="/listing" component={ListingPage} />
-								<Route path="/books/:id" component={BookPage} />
-								<Route exact path="/register" component={RegisterPage} />
-								<Route exact path="/login" component={LoginPage} />
-								<Route exact path="/logout" component={LogoutPage} />
-								<Route exact path="/me" component={CurrentUserPage} />
-							</Switch>
-
-							<ErrorsNotification
-								errors={this.props.errorContent}
-								onCloseClick={this.handleErrorClick.bind(this)}
-							/>
-						</Container>
+								<ErrorsNotification
+									errors={this.props.errorContent}
+									onCloseClick={this.handleErrorClick.bind(this)}
+								/>
+							</div>
+						</div>
+						<Footer />
 					</div>
 				</Router>
 			</Provider>
@@ -96,7 +97,7 @@ function mapStateToProps(state) {
 }
 
 App.propTypes = {
-	errorContent: PropTypes.object.isRequired,
+	errorContent: PropTypes.object,
 	isUserLogin: PropTypes.bool.isRequired,
 	currentUser: PropTypes.object.isRequired,
 	store: PropTypes.object.isRequired,

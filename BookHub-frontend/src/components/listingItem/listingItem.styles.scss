@@ -1,0 +1,39 @@
+@import '../../styles/configs/configs';
+
+.listing-item {
+	max-width: 33.30%;
+
+	.listing-item-img {
+		img {
+			max-width: 100%;
+		}
+	}
+
+	.listing-item-content {
+		background: $background-color-primary;
+		margin-right: 15px;
+		box-sizing: border-box;
+		padding: 20px;
+	}
+
+	&:nth-child(3n) {
+		.listing-item-content {
+			margin-right: 0;
+		}
+	}
+
+	&:nth-child(even) {
+		.listing-item-content {
+			background: $background-color-secondary;
+			color: $white;
+			
+			a {
+				color: $white;
+
+				&:hover {
+					color: $text-color-secondary
+				}
+			}
+		}
+	}
+}

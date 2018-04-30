@@ -53,7 +53,8 @@ class RegisterPage extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className='page-container'>
+				<h1>Register</h1>
 				{this.renderRegisterForm()}
 			</div>
 		);

@@ -52,6 +52,8 @@ export default function RegisterForm(props) {
 					id='email'
 				/>
 			</div>
+
+			{props.values.password &&
 			<div className='form-field'>
 				<label htmlFor='password'>Password</label>
 				<input
@@ -64,7 +66,11 @@ export default function RegisterForm(props) {
 					type="password"
 				/>
 			</div>
+			}
+
+			{props.values.password &&
 			<button type='submit' className="btn">Submit</button>
+			}
 		</form>
 	);
 }

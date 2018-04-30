@@ -17,3 +17,4 @@ export const SET_TOKEN = 'set_token';
 
 /* USERS */
 export const SET_CURRENT_USER = 'set_current_user';
+export const GET_CURRENT_USER = 'get_current_user';

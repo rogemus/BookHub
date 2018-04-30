@@ -1,25 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import UserNav from '../userNav/userNav.component';
-import Nav from '../nav/nav.component';
+import SubNav from '../subNav/subNav.component';
 
 import './heade.styles.scss';
 
 export default function Header(props) {
-	function renderSubNav(props) {
-		if (props.isUserLogin) {
-			return <UserNav user={props.user} />;
-		} else {
-			return <Nav />;
-		}
-	}
-
 	return (
 		<header className='header-main'>
 			<div className="header-sub">
 				<div className="wrapper">
-					{renderSubNav(props)}
+					<SubNav isUserLogin={props.isUserLogin} user={props.user} />
 				</div>
 			</div>
 

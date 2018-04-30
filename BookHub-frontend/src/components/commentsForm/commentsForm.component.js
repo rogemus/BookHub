@@ -1,5 +1,4 @@
 import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 export default class CommentsForm extends React.Component {

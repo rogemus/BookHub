@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {login} from '../../actions/authentication.actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { login } from '../../actions/authentication.actions';
 import LoginForm from '../../components/loginForm/loginForm.component';
 import PropTypes from 'prop-types';
 
@@ -15,13 +15,11 @@ class LoginPage extends Component {
 	}
 
 	renderLoginForm() {
-		return (
-			<LoginForm
-				handleSubmit={this.onSubmit.bind(this)}
-				handleChange={this.onChange.bind(this)}
-				values={{username: this.state.username, password: this.state.password}}
-			/>
-		);
+		return <LoginForm
+			handleSubmit={this.onSubmit.bind(this)}
+			handleChange={this.onChange.bind(this)}
+			values={{username: this.state.username, password: this.state.password}}
+		/>;
 	}
 
 	onSubmit($event) {
@@ -41,7 +39,8 @@ class LoginPage extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className='page-container'>
+				<h1>Login</h1>
 				{this.renderLoginForm()}
 			</div>
 		);

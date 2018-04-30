@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Montserrat:600,700|Pacifico');
 
-
 body {
 	@include font-size($text-size-base);
 
@@ -32,7 +31,7 @@ body {
 	h6 {
 		font-family: $text-heading-font;
 		font-weight: 700;
-		color: $black;
+		color: $text-color-secondary;
 	}
 
 	p,
@@ -56,7 +55,7 @@ body {
 
 		&:hover,
 		&:focus {
-			color: $text-color-secondary;
+			color: $text-color-tertiary;
 		}
 	}
 

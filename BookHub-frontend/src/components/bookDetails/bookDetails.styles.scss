@@ -1,6 +1,14 @@
 @import '../../styles/configs/configs';
 
 .book-details {
+	h2 {
+		margin-bottom: 40px;
+	}
+
+	h5 {
+		margin: 5px 0;
+	}
+
 	.book-details-main-title {
 		padding: 40px 0;
 
@@ -11,13 +19,6 @@
 
 	.book-details-content {
 		display: flex;
-	}
-
-	h2 {
-		margin-bottom: 40px;
-	}
-	h5 {
-		margin: 5px 0;
 	}
 
 	.book-details-authors,

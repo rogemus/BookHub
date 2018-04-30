@@ -1,5 +1,4 @@
 import React from 'react';
-import { Comment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 export default class CommentsListItem extends React.Component {
@@ -11,19 +10,19 @@ export default class CommentsListItem extends React.Component {
 
 	render() {
 		return (
-			<Comment>
-				<Comment.Content>
-					<Comment.Author as='a'>
+			<div className='comment'>
+				<div className='comment-header'>
+					<div className='comment-author'>
 						{this.props.comment.author}
-					</Comment.Author>
-					<Comment.Metadata>
-						<div>{this.renderDate(this.props.comment.submit_date)}</div>
-					</Comment.Metadata>
-					<Comment.Text>
-						{this.props.comment.text}
-					</Comment.Text>
-				</Comment.Content>
-			</Comment>
+					</div>
+					<div className="comment-metadata">
+						{this.renderDate(this.props.comment.submit_date)}
+					</div>
+				</div>
+				<div className="comment-content">
+					{this.props.comment.text}
+				</div>
+			</div>
 		);
 	}
 }

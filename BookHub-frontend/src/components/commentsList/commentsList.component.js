@@ -1,5 +1,4 @@
 import React from 'react';
-import { Comment, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import CommentsForm from '../commentsForm/commentsForm.component';
 import CommentsListItem from '../commentsListItem/commentsListItem.component';
@@ -20,11 +19,11 @@ export default class CommentsList extends React.Component {
 
 	render() {
 		return (
-			<Comment.Group>
-				<Header as='h3' dividing>Comments</Header>
+			<div className='comments-list'>
+				<h3>Comments</h3>
 				{this.renderList()}
 				{this.renderForm()}
-			</Comment.Group>
+			</div>
 		);
 	}
 }

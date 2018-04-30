@@ -10,7 +10,7 @@ const list = (items) => {
 };
 
 export default function Listing({items}) {
-	return (<div className='listing'>{list(items)}</div>);
+	return <div className='listing'>{list(items)}</div>;
 }
 
 Listing.propTypes = {

@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 require('babel-polyfill');
@@ -34,23 +35,17 @@ module.exports = (mode) => {
 				},
 				{
 					test: /\.scss$/,
-					use: [
-						{
-							loader: 'style-loader'
-						},
-						{
-							loader: 'css-loader'
-						},
-						{
-							loader: 'sass-loader'
-						}
-					]
+					use: ExtractTextPlugin.extract({
+						fallback: 'style-loader',
+						use: ['css-loader', 'sass-loader']
+					})
 				}
 			]
 		},
 		mode: mode,
 		plugins: [
-			new FriendlyErrorsWebpackPlugin()
+			new FriendlyErrorsWebpackPlugin(),
+			new ExtractTextPlugin('bundle.css')
 			//new BundleAnalyzerPlugin()
 		],
 		devtool: 'source-map',

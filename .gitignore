@@ -2,6 +2,7 @@ node_modules
 bundle.js
 bundle.js.map
 bundle.css
+bundle.css.map
 url-loader
 fonts
 

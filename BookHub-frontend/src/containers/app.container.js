@@ -7,6 +7,8 @@ import {
 	Switch
 } from 'react-router-dom';
 
+import '../styles/main.scss';
+
 import HomePage from './homePage/homePage.container';
 import BookPage from './bookPage/bookPage.container';
 import ListingPage from './listingPage/listingPage.container';
@@ -19,8 +21,6 @@ import { LOGIN, SET_CURRENT_USER, SET_TOKEN } from '../actions/types';
 import ErrorsNotification from '../components/errorNotification/errorNotification.component';
 import Header from '../components/header/header.component';
 import { clearErrors } from '../actions/errors.actions';
-
-import '../styles/main.scss';
 
 class App extends Component {
 	componentWillMount() {
